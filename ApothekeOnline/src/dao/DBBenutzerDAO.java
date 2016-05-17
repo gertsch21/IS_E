@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import model.Benutzer;
+import model.Kunde;
 
 /**
  * @author Gerhard
@@ -45,7 +48,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 					.prepareStatement("INSERT INTO employee(usrID,staffNo,sallary) VALUES (?, ?, ?)");
 			loadUserStmt = con
 					.prepareStatement("SELECT * FROM user WHERE uName=?");
-			loadKundeStmt = con.prepareStatement("SELECT * FROM customer");
+			loadKundeStmt = con.prepareStatement("SELECT * FROM customer WHERE uName=?");
 			loadMitarStmt = con.prepareStatement("SELECT * FROM employee");
 			
 			loadAllUserStmt = con.prepareStatement("SELECT * FROM user");
@@ -160,6 +163,31 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 	}
 
+	public Kunde getKundeByUsername(String uName){
+		Benutzer b = this.getBenutzerByUName(uName);//Kunde als Benutzer(in DB gespeichert)
+		if(b == null){
+			System.out.println("DBBenutzerDAO: getKundeByUsername: kunde nicht als benutzer gespeichert--> nicht im System");
+			return null;
+		}
+		
+		try{
+			loadKundeStmt.setString(1, uName);
+			ResultSet result = loadUserStmt.executeQuery();
+			if (!result.next()){
+				System.out.println("DBBenutzerDAO: getKundeByUsername: bei dem uName handelt es sich um einen Employee");
+				return null; 
+			}
+			String birthday = result.getString("birthday");
+			
+			Date birth = new Date(birthday);
+			String sex = result.getString("sex");
+			return new Kunde(b.getuName(),b.getUsrID(),b.getPassword(),b.getVorname(),b.getNachname(),b.getEmail(),b.getLand(),b.getPlz(),b.getOrt(),b.getStrasse(),b.getHausNr(),birth,sex);
+		} catch (Exception e) {
+			System.out.println("DBBenutzerDAO: getBenutzerByUName: Error");
+			return null;
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

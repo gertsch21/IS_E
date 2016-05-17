@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Kunde extends Benutzer {
 
 	private Date birthday;
-	private char sex;
+	private String sex;
 	
 	/**
 	 * @param uName
@@ -29,7 +29,7 @@ public class Kunde extends Benutzer {
 	 */
 	public Kunde(String uName, UUID usrID, String password, String vorname,
 			String nachname, String email, String land, int plz, String ort, String strasse,
-			int hausNr, Date birthday, char sex) {
+			int hausNr, Date birthday, String sex) {
 		super(uName, usrID, password, vorname, nachname, email, land, plz, ort,
 				strasse,hausNr);
 		this.birthday = birthday;
@@ -49,7 +49,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @return the sex
 	 */
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
@@ -65,7 +65,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @param sex the sex to set
 	 */
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
