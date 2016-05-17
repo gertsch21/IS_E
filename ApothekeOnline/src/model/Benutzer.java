@@ -50,6 +50,11 @@ public class Benutzer {
 		this.hausNr = hausNr;
 	}
 	
+	
+	public String toString(){
+		String s = "Uname: "+uName+", Name: "+vorname+" "+nachname+", email: "+email;
+		return s;
+	}
 //getters	
 	
 	/**

@@ -1,11 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import management.Benutzerverwaltung;
 
 /**
  * Servlet implementation class Logincontroller
@@ -27,7 +30,7 @@ public class Logincontroller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
-		System.out.println("Weiterleiten zum Registrieren!");
+		System.out.println("LoginController: Weiterleiten zum Login!");
 		request.getRequestDispatcher("Login.jsp").include(request, response);
 		response.setContentType("text/html");
 	}
@@ -36,7 +39,22 @@ public class Logincontroller extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Benutzerverwaltung benver = Benutzerverwaltung.getInstance();
+		String username = request.getParameter("username"); 
+		String password = request.getParameter("password");
+		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+"'.");
+		if(!benver.pruefeLogin(username, password)){
+			request.getSession().invalidate();
+			System.out.println("LoginController: Weiterleiten zum Login!");
+			request.getRequestDispatcher("Login.jsp").include(request, response);
+			response.setContentType("text/html");
+		}
+		else{
+			request.getSession().invalidate();
+			System.out.println("LoginController: Erfolgreiche Pruefung: Weiterleiten zur Hauptseite!");
+			request.getRequestDispatcher("Hauptseite.jsp").include(request, response);
+			response.setContentType("text/html");
+		}
 	}
 
 }

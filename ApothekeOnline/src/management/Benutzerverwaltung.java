@@ -3,6 +3,7 @@
  */
 package management;
 
+import java.util.List;
 import java.util.UUID;
 
 import model.Benutzer;
@@ -40,6 +41,42 @@ public class Benutzerverwaltung {
 		UUID id = UUID.randomUUID();
 	System.out.println("benutzerAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password);
 		return dao.speichereBenutzer(new Benutzer(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr));
+	}
+	
+	public boolean pruefeLogin(String username,String password){
+		
+		try{
+			Benutzer p = dao.getBenutzerByUName(username);
+		
+			System.out.println("Prüfe login von: "+username+", korrektes pwd: "+p.getPassword());
+		
+			
+			if(p.getPassword().equals(password)){
+					return true;
+			}
+			return false;//falls kombi nicht passt
+		}catch(NullPointerException e){
+			System.out.println("Benutzerverwaltung: Benutzer mit dem Username '"+username+"' nicht gefunden");
+			return false;//null, da p null ist und p.getPassword aufgerufen wird(es gibt den benutzer nicht)
+		}
+	}
+	
+	/**
+	 * In dierer Methode wird ein vorhandener Benutzer gelöscht.
+	 * 
+	 * @param username Der eineutige Username des neuen Benutzers 
+	 * @return Falls erfolgreich wird true rückgegeben, bei einem Fehler: false
+	 */
+	public boolean benutzerloeschen(String username){//Achtung person nicht benutzer wird gelöscht!!!
+		return this.dao.loescheBenutzer(username);
+	}
+	
+	public List<Benutzer> getAlleBenutzer(){
+		return dao.getBenutzerList();
+	}
+	
+	public Benutzer getBenutzerByUname(String uName){
+		return dao.getBenutzerByUName(uName);
 	}
 
 }
