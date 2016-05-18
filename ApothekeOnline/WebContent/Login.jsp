@@ -18,9 +18,9 @@
 <body>
 <div class="container theme-showcase">
 <div class="jumbotron">
-	<h1><font color="#EC2A3D">I</font><font color="#0064F0">B</font><font color="#F6AD06">u</font><font color="#85BA14">y</font></h1>
+	<h1>Apotheke Online</h1>
 	<h2>Login</h2>
-	<p>(user:admin1 | passwort:admin1)
+	<p>Kunde: (user:nessi | passwort:hallo)<br/> Mitarbeiter: (user:gertsch21 | passwort:hallo) </p>
 <% if(request.getSession().getAttribute("fehler")!=null){ %> 
       <h2><%=request.getSession().getAttribute("fehler")%></h2>
  <% } %> 

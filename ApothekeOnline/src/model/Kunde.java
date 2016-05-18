@@ -68,5 +68,10 @@ public class Kunde extends Benutzer {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	
+	public String toString(){
+		String s = super.toString();
+		return s+", birthday: "+birthday+", Geschlecht: "+sex;
+	}
 
 }

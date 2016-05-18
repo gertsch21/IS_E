@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 import model.Benutzer;
+import model.Kunde;
+import model.Mitarbeiter;
 import dao.BenutzerDAO;
 import dao.DBBenutzerDAO;
 
@@ -78,5 +80,12 @@ public class Benutzerverwaltung {
 	public Benutzer getBenutzerByUname(String uName){
 		return dao.getBenutzerByUName(uName);
 	}
-
+	
+	public Kunde getCustomerByUname(String uName){
+		return dao.getKundeByUsername(uName);
+	}
+	
+	public Mitarbeiter getEmployeeByUname(String uName){
+		return dao.getMitarbeiterByUsername(uName);
+	}
 }

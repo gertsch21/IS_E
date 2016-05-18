@@ -6,8 +6,9 @@ package model;
 import java.util.UUID;
 
 /**
+ * 
  * @author Gerhard
- *
+ * Diese Klasse symbolisiert die Mitarbeiter, welche aber auch Benutzer vom System sind.
  */
 public class Mitarbeiter extends Benutzer {
 
@@ -70,6 +71,9 @@ public class Mitarbeiter extends Benutzer {
 		this.sallary = sallary;
 	}
 
-	
+	public String toString(){
+		String s = super.toString();
+		return s+", sallary: "+sallary+", StaffNo: "+staffNo;
+	}
 	
 }

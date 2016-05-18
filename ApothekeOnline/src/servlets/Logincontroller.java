@@ -42,19 +42,29 @@ public class Logincontroller extends HttpServlet {
 		Benutzerverwaltung benver = Benutzerverwaltung.getInstance();
 		String username = request.getParameter("username"); 
 		String password = request.getParameter("password");
-		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+"'.");
-		if(!benver.pruefeLogin(username, password)){
+		String alsWas = request.getParameter("alsWas");
+		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+"', als "+alsWas+".");
+		
+		if(benver.getCustomerByUname(username) !=null){
 			request.getSession().invalidate();
-			System.out.println("LoginController: Weiterleiten zum Login!");
-			request.getRequestDispatcher("Login.jsp").include(request, response);
+			System.out.println("LoginController: Erfolgreiche Pruefung(istKunde): Weiterleiten zur Hauptseite des Kunden!");
+			request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
 			response.setContentType("text/html");
+			return;
 		}
-		else{
+		if(benver.getEmployeeByUname(username) != null){
 			request.getSession().invalidate();
-			System.out.println("LoginController: Erfolgreiche Pruefung: Weiterleiten zur Hauptseite!");
-			request.getRequestDispatcher("Hauptseite.jsp").include(request, response);
+			System.out.println("LoginController: Erfolgreiche Pruefung(istMitarbeiter): Weiterleiten zur Hauptseite des Mitarbeiters!");
+			request.getRequestDispatcher("HauptseiteMitarbeiter.jsp").include(request, response);
 			response.setContentType("text/html");
+			return;
 		}
+
+//Falls nichts von beiden
+		request.getSession().invalidate();
+		System.out.println("LoginController: Weiterleiten zum Login!");
+		request.getRequestDispatcher("Login.jsp").include(request, response);
+		response.setContentType("text/html");
 	}
 
 }

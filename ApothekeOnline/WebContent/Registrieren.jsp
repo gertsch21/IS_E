@@ -3,17 +3,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<!-- To ensure proper rendering and touch zooming for mobile -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="Gerhard">
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<title>Registration Kunde</title>
 
-    <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	
-	<title>Registrierung</title>
+<!-- To ensure proper rendering and touch zooming for mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap core CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Bootstrap theme -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	rel="stylesheet">
+
 </head>
 <body>
 <div class="container theme-showcase" role="main">
@@ -40,7 +51,7 @@
 			<tr><td><input type="submit" value="Send" /></td><td></td></tr>
 		</table>
 	</form>
-	<form action="Logincontroller" method="get">
+	<form action="Logincontroller" method="GET">
 		<table>
 			<tr><td><input type="submit" value="Back to login" /></td><td></td></tr>
 		</table>
