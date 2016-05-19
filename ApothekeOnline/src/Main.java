@@ -16,9 +16,12 @@ public class Main {
 		for(Benutzer i : alleBenutzer)
 			System.out.println(i.toString());
 		Benutzer b = benver.getBenutzerByUname("nessi");
-		Benutzer c = benver.getCustomerByUname("nessi");
-		Benutzer m = benver.getEmployeeByUname("nessi");
-		System.out.println("Kunde: "+c.toString());
-		System.out.println("Mitarbeiter: "+m.toString());
+
+		
+		benver.kundeAnlegen("ersterkunde", "ersterkunde", "ersterkunde", "ersterkunde", 123, "ersterkunde", "ersterkunde", 123, "ersterkunde", "ersterkunde", "2013.05.02", "m");
+		System.out.println("\n\nKunde: \n"+benver.getCustomerByUname("ersterkunde").toString());
+		
+		benver.mitarbeiterAnlegen("ersterMitarbeiter", "ersterMitarbeiter", "ersterMitarbeiter", "ersterMitarbeiter", 132, "ersterMitarbeiter", "ersterMitarbeiter", 123, "ersterMitarbeiter", "ersterMitarbeiter", 123, 123);
+		System.out.println("\n\nMitarbeiter: \n"+benver.getEmployeeByUname("ersterMitarbeiter"));
 	}
 }

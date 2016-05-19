@@ -41,8 +41,21 @@ public class Benutzerverwaltung {
 //zum testen
 	public boolean benutzerAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password){//Verbesserungswürdig!!!
 		UUID id = UUID.randomUUID();
-	System.out.println("benutzerAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password);
+		System.out.println("Benutzerverwaltung:benutzerAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+", anlegen!");
 		return dao.speichereBenutzer(new Benutzer(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr));
+	}
+	
+	
+	public boolean kundeAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password, String birthday, String sex){//Verbesserungswürdig!!!
+		UUID id = UUID.randomUUID();
+		System.out.println("Benutzerverwaltung:kundeAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+",  "+birthday+", "+sex+", anlegen!");
+		return dao.speichereKunde(new Kunde(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr,birthday,sex));
+	}
+	
+	public boolean mitarbeiterAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password, int staffNo, int salary){//Verbesserungswürdig!!!
+		UUID id = UUID.randomUUID();
+		System.out.println("Benutzerverwaltung:mitarbeiterAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+",  "+staffNo+", "+salary+", anlegen!");
+		return dao.speichereMitarbeiter(new Mitarbeiter(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr,staffNo,salary));
 	}
 	
 	public boolean pruefeLogin(String username,String password){

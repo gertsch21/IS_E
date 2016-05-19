@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class Kunde extends Benutzer {
 
-	private Date birthday;
+	private String birthday;
 	private String sex;
 	
 	/**
@@ -29,7 +29,7 @@ public class Kunde extends Benutzer {
 	 */
 	public Kunde(String uName, UUID usrID, String password, String vorname,
 			String nachname, String email, String land, int plz, String ort, String strasse,
-			int hausNr, Date birthday, String sex) {
+			int hausNr, String birthday, String sex) {
 		super(uName, usrID, password, vorname, nachname, email, land, plz, ort,
 				strasse,hausNr);
 		this.birthday = birthday;
@@ -42,7 +42,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @return the birthday
 	 */
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
@@ -58,7 +58,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @param birthday the birthday to set
 	 */
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

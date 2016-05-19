@@ -37,17 +37,30 @@
 		<table class="table">
 			<tr><th>Parameter</th><th>Wert</th></tr>
 			
-			<tr><td>Vorname:</td> <td><input type="text" name="vorname" value="vorname"/></td>
-			<tr><td>Nachname:</td> <td><input type="text" name="nachname" value="nachname" /></td>
-			<tr><td>Email:</td> <td><input type="text" name="email" value="email"/></td>
-			<tr><td>Land:</td> <td><input type="text" name="land" value="land"/></td>
-			<tr><td>PLZ:</td> <td><input type="text" name="plz" value="1234"/></td>
-			<tr><td>Wohnort:</td> <td><input type="text" name="wohnort" value="ort"/></td>
-			<tr><td>Strasse:</td> <td><input type="text" name="strasse" value="strasse"/></td>
-			<tr><td>HausNr:</td> <td><input type="text" name="nummer" value="1"/></td>
-			<tr><td>Username:</td> <td><input type="text" name="username" value="unamee"/></td>
-			<tr><td>Password:</td> <td><input type="password" name="password" /></td>
-			<tr><td>Password wiederholen:</td> <td><input type="password" name="passwordW" /></td>
+			<tr><td>Vorname:</td> <td><input type="text" name="vorname" value="vorname"/></td></tr>
+			<tr><td>Nachname:</td> <td><input type="text" name="nachname" value="nachname" /></td></tr>
+			<tr><td>GebDatum:</td> <td><input type="date" name="bday"/></td></tr>
+			<tr><td>Email:</td> <td><input type="text" name="email" value="email"/></td></tr>
+		</table>
+		<table class="table">
+			<tr><td>Land:</td> <td><input type="text" name="land" value="land"/></td></tr>
+			<tr><td>PLZ:</td> <td><input type="text" name="plz" value="1234"/></td></tr>
+			<tr><td>Wohnort:</td> <td><input type="text" name="wohnort" value="ort"/></td></tr>
+			<tr><td>Strasse:</td> <td><input type="text" name="strasse" value="strasse"/></td></tr>
+			<tr><td>HausNr:</td> <td><input type="text" name="nummer" value="1"/></td></tr>
+		</table>
+		
+		
+		<input type="radio" name="gender" value="male"> Male<br>
+		<input type="radio" name="gender" value="female"> Female<br>
+		<input type="radio" name="gender" value="other" checked> Other
+		
+		<table class="table">
+			<tr><td>Username:</td> <td><input type="text" name="username" value="unamee"/></td></tr>
+			<tr><td>Password:</td> <td><input type="password" name="password" /></td></tr>
+			<tr><td>Password wiederholen:</td> <td><input type="password" name="passwordW" /></td></tr>
+			
+			
 			<tr><td><input type="submit" value="Send" /></td><td></td></tr>
 		</table>
 	</form>

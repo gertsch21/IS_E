@@ -58,14 +58,22 @@ public class Registriercontroller extends HttpServlet {
 			String vorname=request.getParameter("vorname");
 			String nachname=request.getParameter("nachname");
 			String email=request.getParameter("email");
+			String birthday=request.getParameter("bday");
+			
 			String land=request.getParameter("land");
 			String plzString=request.getParameter("plz");
 			String wohnort=request.getParameter("wohnort");
 			String strasse=request.getParameter("strasse");
 			String hausNrString=request.getParameter("nummer");
+			
+			String geschlecht = request.getParameter("gender");
+			
 			String username=request.getParameter("username");
 			String password=request.getParameter("password");
 			String passwordW=request.getParameter("passwordW");
+			
+			System.out.println("RegistrierController: Post: geschlecht: "+geschlecht+", Geb: "+birthday);
+			
 			int hausNr = 0;
 			int plz = 0;
 			try{
@@ -73,7 +81,7 @@ public class Registriercontroller extends HttpServlet {
 				plz = Integer.parseInt(plzString);
 			}catch(Exception e){
 				request.getSession(true).setAttribute("fehler", "Fehler: Hausnummer ist keine Nummer!");
-				System.out.println("RegistrierungsController: Hausnummer ist keine Nummer!");
+				System.out.println("RegistrierungsController: Hausnummer oder PLZ ist keine Nummer!");
 				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
 				response.setContentType("text/html");
 				return;
@@ -111,14 +119,14 @@ public class Registriercontroller extends HttpServlet {
 				session.setAttribute("username", username);
 				System.out.println("RegistrierungsController: Person angelegt: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
 				session.setAttribute("fehler", "");
-				request.getRequestDispatcher("Hauptseite.jsp").include(request, response);
+				request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
 				response.setContentType("text/html");
 				return;
 			}
 			//eingabe nicht erfolgreich:
 			else{
 				System.out.println("RegistrierungsController: Person konnte nicht angelegt werden: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
-				response.sendRedirect("Login.jsp");
+				response.sendRedirect("Registrieren.jsp");
 			}
 		}
 		
