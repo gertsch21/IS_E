@@ -2,12 +2,13 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%
-	if(session.getAttribute("username")==null || session.getAttribute("username").equals("null")  ){
-		System.out.println("HauptseiteMitarbeiter: nicht eingeloggt -> Login");
-		session.invalidate();
+	if (session.getAttribute("username") == null
+			|| session.getAttribute("username").equals("null")) {
+		System.out
+				.println("HauptseiteMitarbeiter: nicht eingeloggt -> Login");
 		response.sendRedirect("Login.jsp");
 	}
-%>    
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -77,19 +78,35 @@
 		<!-- Main jumbotron for a primary marketing message or call to action -->
 		<div class="jumbotron">
 
-			<h1 style="color: #0B2161">
-				<b>Mitarbeiter Hauptseite</b>
-			</h1>
-			<h2>Gerhard Schmidt</h2>
-			<p>"When the English language gets in my way, I walk over it."</p>
+			<h1>
+				Willkommen  &nbsp; <%=session.getAttribute("username")%></h1>
 
+			<div>
+				<form class="navbar-form navbar-left"
+					action="SucheProduktController" method="post">
+					<div class="form-group">
+						<b>Produkt:</b> <input class="form-control" name="suchwert"
+							type="text" size="80" />
+					</div>
+					<input class="btn btn-primary" type="submit" value="suchen" />
+				</form>
+				
+				
+				<br /> <br />
+				
+				<form action="Logincontroller" method="GET">
+					<input class="btn btn-primary" name="logout" type="submit"
+						value="Logout" />
+				</form>	
+				
+
+			</div>
+				<form action="MitarbeiterRegistrierController" method="POST">
+					<input class="btn btn-primary" name="mitarbeiterReg" type="submit" value="Mitarbeiter registrieren"/>
+					<input type="hidden" name="regBest" value="true"/>
+				</form>
+			</div>
 
 		</div>
-		<form action="Logincontroller" method="GET">
-			<table>
-				<tr><td><input type="submit" value="Logout" /></td></tr>
-			</table>
-		</form>
-	</div>
 </body>
 </html>

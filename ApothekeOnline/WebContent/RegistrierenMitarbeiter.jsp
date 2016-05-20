@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%
+	if (session.getAttribute("username") == null
+			|| session.getAttribute("username").equals("null")) {
+		System.out
+				.println("HauptseiteMitarbeiter: nicht eingeloggt -> Login");
+		response.sendRedirect("Login.jsp");
+	}
+%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +20,7 @@
 <meta name="description" content="">
 <meta name="author" content="Gerhard">
 
-<title>Registration Kunde</title>
+<title>Registration Mitarbeiter</title>
 
 <!-- To ensure proper rendering and touch zooming for mobile -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +39,7 @@
 <body>
 	<div class="container theme-showcase" role="main">
 		<div class="jumbotron">
-			<h1>Registrieren sie sich:</h1>
+			<h1>Registrieren sie nun einen neuen Mitarbeiter:</h1>
 			<%
 				if (request.getSession().getAttribute("fehler") != null) {
 			%>
@@ -37,7 +47,7 @@
 			<%
 				}
 			%>
-			<form action="Registriercontroller" method="POST">
+			<form action="MitarbeiterRegistrierController" method="POST">
 				<table class="table">
 					<tr>
 						<th>Parameter</th>
@@ -52,13 +62,14 @@
 						<td>Nachname:</td>
 						<td><input type="text" name="nachname" value="nachname" /></td>
 					</tr>
-					<tr>
-						<td>GebDatum:</td>
-						<td><input type="date" name="bday" /></td>
-					</tr>
+
 					<tr>
 						<td>Email:</td>
 						<td><input type="text" name="email" value="email" /></td>
+					</tr>
+					<tr>
+						<td>Salary:</td>
+						<td><input type="text" name="salary" /></td>
 					</tr>
 				</table>
 				<table class="table">
@@ -68,7 +79,7 @@
 					</tr>
 					<tr>
 						<td>PLZ:</td>
-						<td><input type="text" name="plz" value="1234" /></td>
+						<td><input type="number" name="plz" value="1234" /></td>
 					</tr>
 					<tr>
 						<td>Wohnort:</td>
@@ -80,17 +91,15 @@
 					</tr>
 					<tr>
 						<td>HausNr:</td>
-						<td><input type="text" name="nummer" value="1" /></td>
+						<td><input type="number" name="nummer" value="1" /></td>
 					</tr>
 				</table>
 
-
-				<input type="radio" name="gender" value="male"> Male<br>
-				<input type="radio" name="gender" value="female"> Female<br>
-				<input type="radio" name="gender" value="other" checked>
-				Other
-
 				<table class="table">
+					<tr>
+						<td>staffNo:</td>
+						<td><input type="number" name="staffNo" value="" /></td>
+					</tr>
 					<tr>
 						<td>Username:</td>
 						<td><input type="text" name="username" value="unamee" /></td>
@@ -111,14 +120,11 @@
 					</tr>
 				</table>
 			</form>
-			<form action="Logincontroller" method="GET">
-				<table>
-					<tr>
-						<td><input type="submit" value="Back to login" /></td>
-						<td></td>
-					</tr>
-				</table>
+			
+			<form method="get" action="HauptseiteMitarbeiter.jsp">
+			    <button type="submit">Back</button>
 			</form>
+
 		</div>
 	</div>
 </body>
