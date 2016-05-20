@@ -72,6 +72,8 @@ public class Registriercontroller extends HttpServlet {
 			String password=request.getParameter("password");
 			String passwordW=request.getParameter("passwordW");
 			
+			
+			
 			System.out.println("RegistrierController: Post: geschlecht: "+geschlecht+", Geb: "+birthday);
 			
 			int hausNr = 0;
@@ -114,10 +116,10 @@ public class Registriercontroller extends HttpServlet {
 			
 			
 			//Nachdem Benutzer angelegt wurde, wird er automatisch(nicht über Login) zur Hauptseite.jsp weitergeleitet.
-			if(benver.benutzerAnlegen(vorname, nachname, email, land, plz, wohnort, strasse, hausNr, username, password)){
+			if(benver.kundeAnlegen(vorname, nachname, email, land, plz, wohnort, strasse, hausNr, username, password,birthday,geschlecht)){
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);
-				System.out.println("RegistrierungsController: Person angelegt: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
+				System.out.println("RegistrierungsController: Kunde angelegt: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
 				session.setAttribute("fehler", "");
 				request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
 				response.setContentType("text/html");
