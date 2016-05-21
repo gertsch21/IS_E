@@ -13,40 +13,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="Gerhard">
+<meta name="description" content=""/>
+<meta name="author" content="Gerhard"/>
 
-<title>Registration Mitarbeiter</title>
+<title>MitarbeiterRegistration</title>
 
 <!-- To ensure proper rendering and touch zooming for mobile -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 <!-- Bootstrap core CSS -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet"/>
 
 <!-- Bootstrap theme -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-	rel="stylesheet">
+	rel="stylesheet"/>
 
 </head>
 <body>
 	<div class="container theme-showcase" role="main">
 		<div class="jumbotron">
 			<h1>Registrieren sie nun einen neuen Mitarbeiter:</h1>
+
+<!-- Möglichen Fehlertext ausgeben -->
 			<%
 				if (request.getSession().getAttribute("fehler") != null) {
 			%>
 			<h2><%=request.getSession().getAttribute("fehler")%></h2>
 			<%
+					request.getSession().setAttribute("fehler", null); //nach ausgabe auf null setzen
 				}
 			%>
+
+
+<!-- Eingaben zum Registrieren -->
 			<form action="MitarbeiterRegistrierController" method="POST">
 				<table class="table">
 					<tr>
@@ -112,15 +118,14 @@
 						<td>Password wiederholen:</td>
 						<td><input type="password" name="passwordW" /></td>
 					</tr>
-
-
 					<tr>
 						<td><input type="submit" value="Send" /></td>
 						<td></td>
 					</tr>
 				</table>
 			</form>
-			
+
+<!-- Einfaches Retour zur Hauptseite -->
 			<form method="get" action="HauptseiteMitarbeiter.jsp">
 			    <button type="submit">Back</button>
 			</form>

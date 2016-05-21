@@ -64,12 +64,10 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	}
 
 	/*
-	 * (non-Javadoc)
 	 * 
-	 * @see dao.BenutzerDAO#speichereBenutzer(model.Benutzer)
+	 * zum speichern in der Tabelle Benutzer, benötigt, um Kunden und Mitarbeiter zu speichern
 	 */
-	@Override
-	public boolean speichereBenutzer(Benutzer b) {
+	private boolean speichereBenutzer(Benutzer b) {
 		try {
 			System.out.println("DBBenutzerDB:speichereBenutzer: " + b.getUsrID().toString()
 					+ ", " + b.getuName() + ", " + b.getNachname());
@@ -308,12 +306,23 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	}
 	
 	/*
-	 * (non-Javadoc)
+	 * Ist benötigt, um Einträge aus der Tabelle Benutzer zu löschen
+	 * Wird benötigt um Kunden und Mitarbeiter zu löschen
 	 * 
-	 * @see dao.BenutzerDAO#loescheBenutzer(java.lang.String)
-	 */
+	*/
+	private boolean loescheBenutzer(String uName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Override
-	public boolean loescheBenutzer(String uName) {
+	public boolean loescheKunde(String uName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean loescheMitarbeiter(String uName) {
 		// TODO Auto-generated method stub
 		return false;
 	}

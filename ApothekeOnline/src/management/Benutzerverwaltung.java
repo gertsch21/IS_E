@@ -39,12 +39,13 @@ public class Benutzerverwaltung {
 	}
 
 //zum testen
+/*
 	public boolean benutzerAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password){//Verbesserungswürdig!!!
 		UUID id = UUID.randomUUID();
 		System.out.println("Benutzerverwaltung:benutzerAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+", anlegen!");
 		return dao.speichereBenutzer(new Benutzer(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr));
 	}
-	
+*/
 	
 	public boolean kundeAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password, String birthday, String sex){//Verbesserungswürdig!!!
 		UUID id = UUID.randomUUID();
@@ -76,16 +77,14 @@ public class Benutzerverwaltung {
 		}
 	}
 	
-	/**
-	 * In dierer Methode wird ein vorhandener Benutzer gelöscht.
-	 * 
-	 * @param username Der eineutige Username des neuen Benutzers 
-	 * @return Falls erfolgreich wird true rückgegeben, bei einem Fehler: false
-	 */
+
+// nur zum testen
+/*
 	public boolean benutzerloeschen(String username){//Achtung person nicht benutzer wird gelöscht!!!
 		return this.dao.loescheBenutzer(username);
 	}
-	
+*/
+
 	public List<Benutzer> getAlleBenutzer(){
 		return dao.getBenutzerList();
 	}

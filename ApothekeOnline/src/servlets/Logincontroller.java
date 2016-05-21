@@ -51,7 +51,7 @@ public class Logincontroller extends HttpServlet {
 			System.out.println("LoginController: Erfolgreiche Pruefung(istKunde): Weiterleiten zur Hauptseite des Kunden!");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", username);
-			session.setAttribute("fehler", "");
+			session.setAttribute("fehler", null);
 			request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
 			response.setContentType("text/html");
 			return;
@@ -61,7 +61,7 @@ public class Logincontroller extends HttpServlet {
 			System.out.println("LoginController: Erfolgreiche Pruefung(istMitarbeiter): Weiterleiten zur Hauptseite des Mitarbeiters!");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", username);
-			session.setAttribute("fehler", "");
+			session.setAttribute("fehler", null);
 			request.getRequestDispatcher("HauptseiteMitarbeiter.jsp").include(request, response);
 			response.setContentType("text/html");
 			return;

@@ -79,7 +79,7 @@ public class Registriercontroller extends HttpServlet {
 				hausNr = Integer.parseInt(hausNrString);
 				plz = Integer.parseInt(plzString);
 			}catch(Exception e){
-				request.getSession(true).setAttribute("fehler", "Fehler: Hausnummer oder PLZ ist keine Nummer!");
+				request.getSession(true).setAttribute("fehler", "Hausnummer oder PLZ ist keine Nummer oder zu lang!");
 				System.out.println("RegistrierungsController: Hausnummer oder PLZ ist keine Nummer!");
 				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
 				response.setContentType("text/html");
@@ -87,7 +87,7 @@ public class Registriercontroller extends HttpServlet {
 			}
 			
 			if(username.length()<=5  || password.length()<=5 ){
-				request.getSession(true).setAttribute("fehler", "Fehler: Username od. Passwort zu kurz!");
+				request.getSession(true).setAttribute("fehler", "Username od. Passwort zu kurz!");
 				System.out.println("RegistrierungsController: Pwd od. Username  <  5 Zeichen!");
 				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
 				response.setContentType("text/html");
@@ -96,7 +96,7 @@ public class Registriercontroller extends HttpServlet {
 			
 			//Wiederholtes Passwort nicht korrekt
 			if(!password.equals(passwordW) ){
-				request.getSession(true).setAttribute("fehler", "Fehler: Passwortwiederholung nicht korrekt!");
+				request.getSession(true).setAttribute("fehler", "Passwortwiederholung nicht korrekt!");
 				System.out.println("RegistrierungsController: Passwortwiederholung nicht korrekt!!");
 				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
 				response.setContentType("text/html");
@@ -116,8 +116,9 @@ public class Registriercontroller extends HttpServlet {
 			if(benver.kundeAnlegen(vorname, nachname, email, land, plz, wohnort, strasse, hausNr, username, password,birthday,geschlecht)){
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", username);
+				session.setAttribute("message", "Wilkommen "+username+" bei uns!");
 				System.out.println("RegistrierungsController: Kunde angelegt: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
-				session.setAttribute("fehler", "");
+				session.setAttribute("fehler", null);
 				request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
 				response.setContentType("text/html");
 				return;

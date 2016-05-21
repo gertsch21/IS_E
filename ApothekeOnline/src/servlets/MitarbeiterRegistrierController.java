@@ -91,8 +91,17 @@ public class MitarbeiterRegistrierController extends HttpServlet {
 				salaryDouble = Double.parseDouble(salaryString) *100; //damit in cent gespeichert
 				salary = salaryDouble.intValue();
 			}catch(Exception e){
-				request.getSession(true).setAttribute("fehler", "Fehler: Keine Nummer!");
-				System.out.println("MitarbeiterRegistrierungsController: Hausnummer oder PLZ ist keine Nummer!");
+				request.getSession(true).setAttribute("fehler", "Keine Nummer(HausNr oder Plz oder staffNo oder salary) oder zu lang!");
+				System.out.println("MitarbeiterRegistrierungsController: Hausnummer oder PLZ oder salary oder staffNo ist keine Nummer!");
+				request.getRequestDispatcher("RegistrierenMitarbeiter.jsp").include(request, response);
+				response.setContentType("text/html");
+				return;
+			}
+			
+			
+			if(Integer.MAX_VALUE==salary || Integer.MAX_VALUE==plz || Integer.MAX_VALUE==staffNo || Integer.MAX_VALUE ==hausNr){
+				request.getSession(true).setAttribute("fehler", "Nummer(Plz oder HausNr oder staffNo oder salary) ist zu lang!");
+				System.out.println("MitarbeiterRegistrierungsController: Hausnummer oder PLZ oder salary oder staffNoist keine Nummer!");
 				request.getRequestDispatcher("RegistrierenMitarbeiter.jsp").include(request, response);
 				response.setContentType("text/html");
 				return;
@@ -127,9 +136,9 @@ public class MitarbeiterRegistrierController extends HttpServlet {
 			//Nachdem Benutzer angelegt wurde, wird er automatisch(nicht über Login) zur Hauptseite.jsp weitergeleitet.
 			if(benver.mitarbeiterAnlegen(vorname, nachname, email, land, plz, wohnort, strasse, hausNr, username, passwordW, staffNo, salary)){
 				HttpSession session = request.getSession(true);
-				session.setAttribute("username", username);
+				session.setAttribute("message", "JUHU, '"+username+"' wurde nun als Mitarbeiter gespeichert");
 				System.out.println("MitarbeiterRegistrierungsController: Kunde angelegt: "+vorname+" "+nachname+" "+email+" "+strasse+" "+wohnort+" "+username+" "+password);
-				session.setAttribute("fehler", "");
+				session.setAttribute("fehler", null);
 				request.getRequestDispatcher("HauptseiteMitarbeiter.jsp").include(request, response);
 				response.setContentType("text/html");
 				return;
