@@ -116,6 +116,10 @@
 					<input class="btn btn-primary" name="mitarbeiterReg" type="submit" value="Mitarbeiter registrieren"/>
 					<input type="hidden" name="regBest" value="true"/>
 				</form>
+				<form action="Benutzerverwaltungscontroller" method="POST">
+					<input class="btn btn-primary" name="mitarbeiterReg" type="submit" value="Kunden verwalten"/>
+					<input type="hidden" name="regBest" value="true"/>
+				</form>
 			</div>
 
 		</div>

@@ -7,8 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +31,14 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	private PreparedStatement loadKundeStmt;
 	private PreparedStatement loadMitarStmt;
 	private PreparedStatement loadUserStmt;
+	private PreparedStatement loadUserStmtID;
 	private PreparedStatement loadAllUserStmt;
+	private PreparedStatement loadAllKundeStmt;
+	
+	private PreparedStatement deleteKundeStmt;
+	private PreparedStatement deleteMitarStmt;
+	private PreparedStatement deleteUserStmt;
+	
 	
 
 	/**
@@ -51,11 +58,18 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			saveMitarStmt = con
 					.prepareStatement("INSERT INTO employee(usrID,staffNo,sallary) VALUES (?, ?, ?)");
 			
+			loadUserStmtID = con.prepareStatement("SELECT * FROM user WHERE usrID=?");
 			loadUserStmt = con.prepareStatement("SELECT * FROM user WHERE uName=?");
 			loadKundeStmt = con.prepareStatement("SELECT * FROM customer WHERE usrID=?");
 			loadMitarStmt = con.prepareStatement("SELECT * FROM employee WHERE usrID=?");
 			
 			loadAllUserStmt = con.prepareStatement("SELECT * FROM user");
+			loadAllKundeStmt = con.prepareStatement("SELECT * FROM customer");
+			
+			deleteUserStmt = con.prepareStatement("DELETE FROM user WHERE usrID=?");
+			deleteKundeStmt = con.prepareStatement("DELETE FROM customer WHERE usrID=?");
+			deleteMitarStmt = con.prepareStatement("DELETE FROM employee WHERE usrID=?");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Verbindungsaufbau zur DB nicht möglich!!");
@@ -192,7 +206,45 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			return null;
 		}
 	}
-
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.BenutzerDAO#getBenutzerList()
+	 */
+	@Override
+	public List<Benutzer> getKundenList() {
+		List<String> alleUsrIDKunden = new ArrayList<String>();
+		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
+		List<Benutzer> benutzerAlsKundeListe = new ArrayList<Benutzer>();
+		List<Kunde> kundenListe = new ArrayList<Kunde>();
+		try {
+			ResultSet result = loadAllKundeStmt.executeQuery();
+			int anzKunden = 0;
+			
+			while(result.next()){
+				String usrID = result.getString("usrID");
+				
+				alleUsrIDKunden.add(usrID);
+				anzKunden++;
+			}
+			
+			
+			for(String usrID : alleUsrIDKunden){
+				benutzerAlsKundeListe.add(getBenutzerByUsrID(usrID));
+			}
+			
+			return benutzerAlsKundeListe;
+			
+		} catch (Exception e) {
+			System.out.println("DBBenutzerDAO: getKundenList: Error");
+			return null;
+		}
+	}
+	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -233,6 +285,44 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 	}
 
+	private Benutzer getBenutzerByUsrID(String usrID) {
+		try {
+			loadUserStmtID.setString(1, usrID);
+			ResultSet result = loadUserStmtID.executeQuery();
+			if (!result.next()){
+				System.out.println("DBBenutzerDAO: getBenutzerByUName: Kein Benutzer gefunden!");
+				return null;
+			}
+			
+			
+			UUID uID = UUID.fromString(result.getString("usrID"));
+			String uName = result.getString("uName");
+			String firstname = result.getString("firstname");
+			String surname = result.getString("surname");
+			String email = result.getString("email");
+			String pwd = result.getString("pwd");
+			String country = result.getString("country");
+			String street = result.getString("street");
+			String city = result.getString("city");
+			try {
+				int zip = Integer.parseInt(result.getString("zip"));
+				int num = Integer.parseInt(result.getString("number"));
+
+				return new Benutzer(uName, uID, pwd, firstname, surname, email,
+						country, zip, city, street, num);
+			} catch (NumberFormatException e) {
+				System.out.println("DBBenutzerDAO: getBenutzerByUName: achtung, zip oder number sind in db keine Integer!!");
+				return new Benutzer(uName, uID, pwd, firstname, surname, email,
+						country, 0, city, street, 0);
+			}
+		} catch (Exception e) {
+			System.out.println("DBBenutzerDAO: getBenutzerByUName: Error");
+			return null;
+		}
+	}
+	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -310,23 +400,73 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	 * Wird benötigt um Kunden und Mitarbeiter zu löschen
 	 * 
 	*/
-	private boolean loescheBenutzer(String uName) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean loescheBenutzer(String usrID) {
+		if(usrID.equals(""))
+			return false; //kein Benutzer mit diesem usernamen
+		
+		try{
+			deleteUserStmt.setString(1, usrID);
+			deleteUserStmt.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("DBBenutzerDAO: LoescheBenutzer: "+e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean loescheKunde(String uName) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean loescheKundeByUname(String uName) {
+		String usrID = getUsrIDFromUName(uName);
+		if(usrID.equals(""))
+			return false; //kein Benutzer mit diesem usernamen
+		
+		try{
+			deleteKundeStmt.setString(1, usrID);
+			deleteKundeStmt.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("DBBenutzerDAO: loescheKundeByUname:" +e.getMessage());
+			return false;
+		}
+		
+		if(!loescheBenutzer(usrID))
+			return false;
+		
+		return true;
 	}
 
 	@Override
-	public boolean loescheMitarbeiter(String uName) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean loescheMitarbeiterByUname(String uName) {
+		String usrID = getUsrIDFromUName(uName);
+		if(usrID.equals(""))
+			return false; //kein Benutzer mit diesem usernamen
+		
+		try{
+			deleteMitarStmt.setString(1, usrID);
+			deleteMitarStmt.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("DBBenutzerDAO: loescheMitarbeiterByUname:" +e.getMessage());
+			return false;
+		}
+		
+		if(!loescheBenutzer(usrID))
+			return false;
+		
+		return true;
 	}
 
-
+	private String getUsrIDFromUName(String uName){
+		
+		Benutzer b = getBenutzerByUName(uName);
+		
+		String usrID="";
+		
+		try{
+			usrID = b.getUsrID().toString();
+		}catch(NullPointerException e){
+			return "";
+		}
+		
+		return usrID;
+	}
 
 }

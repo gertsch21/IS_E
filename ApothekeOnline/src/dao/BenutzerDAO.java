@@ -19,6 +19,7 @@ public interface BenutzerDAO {
 	public boolean speichereKunde(Kunde k);
 	public boolean speichereMitarbeiter(Mitarbeiter m);
 	
+	public List<Benutzer> getKundenList();
 	public List<Benutzer> getBenutzerList();
 	public Benutzer getBenutzerByUName(String uName);
 	public Kunde getKundeByUsername(String uName);
@@ -26,8 +27,9 @@ public interface BenutzerDAO {
 	
 	//soll nicht nach außen möglich sein
 	//public boolean loescheBenutzer(String uName);
-	public boolean loescheKunde(String uName);
-	public boolean loescheMitarbeiter(String uName);
+	public boolean loescheKundeByUname(String uName);
+	public boolean loescheMitarbeiterByUname(String uName);
+	
 	
 }
 

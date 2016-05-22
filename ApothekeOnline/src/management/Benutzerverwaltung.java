@@ -89,6 +89,12 @@ public class Benutzerverwaltung {
 		return dao.getBenutzerList();
 	}
 	
+	public List<Benutzer> getAlleKunden(){
+		return dao.getKundenList();
+	}
+	
+	
+	
 	public Benutzer getBenutzerByUname(String uName){
 		return dao.getBenutzerByUName(uName);
 	}
@@ -100,4 +106,15 @@ public class Benutzerverwaltung {
 	public Mitarbeiter getEmployeeByUname(String uName){
 		return dao.getMitarbeiterByUsername(uName);
 	}
+
+	
+	
+	public boolean loescheKunden(String uName){
+		return dao.loescheKundeByUname(uName);
+	}
+	
+	public boolean loescheMitarbeiter(String uName){
+		return dao.loescheMitarbeiterByUname(uName);
+	}
+
 }

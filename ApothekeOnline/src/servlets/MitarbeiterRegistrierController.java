@@ -30,7 +30,6 @@ public class MitarbeiterRegistrierController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Prüfen ob Anfrage von außen ohne MitarbeiterAuthentifizierung erfolgt ist
 		
 		System.out.println("MitarbeiterRegistriercontroller: Weiterleiten zu Login.jsp");
 		request.getRequestDispatcher("Login.jsp").include(request, response);

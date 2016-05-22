@@ -86,8 +86,8 @@ public class Registriercontroller extends HttpServlet {
 				return;
 			}
 			
-			if(username.length()<=5  || password.length()<=5 ){
-				request.getSession(true).setAttribute("fehler", "Username od. Passwort zu kurz!");
+			if(username.length()<5  || password.length()<5 ){
+				request.getSession(true).setAttribute("fehler", "Username od. Passwort zu kurz(mindestens 5 Zeichen benötigt)!");
 				System.out.println("RegistrierungsController: Pwd od. Username  <  5 Zeichen!");
 				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
 				response.setContentType("text/html");
