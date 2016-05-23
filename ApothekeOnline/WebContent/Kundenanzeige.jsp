@@ -61,7 +61,8 @@
 <%for(Benutzer b : (List<Benutzer>)(session.getAttribute("alleKunden")) ){ %>
 					<tr><td><%=b.getuName()%></td><td><%=b.getPassword()%></td><td><input type="submit" name="zuLoeschen" value="<%=b.getuName()%>"/></td></tr>
 <%} %>
-				</table>
+</table>	
+Anzahl an Kunden: <%=( (List<Benutzer>)(session.getAttribute("alleKunden")) ).size()%>			
 			</form>
 
 <!-- Einfaches Retour zur Hauptseite -->
