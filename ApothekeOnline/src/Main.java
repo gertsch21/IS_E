@@ -13,9 +13,13 @@ public class Main {
 
 		BenutzerDAO dao = new DBBenutzerDAO();
 		
-		for(Benutzer b : dao.getKundenList()){
-			System.out.println(b.getuName());
-		}
+		if(benver.kundeAnlegen("kunfdeJava", "kunfdeJava", "kundeJava", "kundeJava", 123, "kundeJava", "kundeJava", 123, "kundeJava", "kundeJava", "12.12.12", "m"))
+			System.out.println("juhU");
 		
+/*		Random randomGenerator = new Random();
+		for(int i=0;i<100;i++){
+			System.out.println(randomGenerator.nextInt(Integer.MAX_VALUE));
+		}
+*/		
 	}
 }

@@ -3,7 +3,6 @@
  */
 package model;
 
-import java.util.UUID;
 
 /**
  * 
@@ -28,7 +27,7 @@ public class Mitarbeiter extends Benutzer {
 	 * @param ort
 	 * @param hausNr
 	 */
-	public Mitarbeiter(String uName, UUID usrID, String password,
+	public Mitarbeiter(String uName, int usrID, String password,
 			String vorname, String nachname, String email, String land,
 			int plz, String ort, String strasse, int hausNr, int staffNo, int sallary) {
 		super(uName, usrID, password, vorname, nachname, email, land, plz, ort,

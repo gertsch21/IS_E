@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import model.*;
 
@@ -21,9 +20,10 @@ import model.*;
  */
 public class DBBenutzerDAO implements BenutzerDAO {
 //Daten für DB Verbindung
-	private final String dbUrl = "jdbc:mysql://localhost:3306/meineapotheketest";
-	private final String user = "root";
-	private final String pwd = "";
+	private final String dbUrl = "jdbc:oracle:thin:@oracle-lab.cs.univie.ac.at:1521:lab";
+	private final String user = "a1363772";
+	private final String pwd = "PRise16";
+	
 //Statements um Daten aus db zu holen(über SQL)
 	private PreparedStatement saveKundeStmt;
 	private PreparedStatement saveMitarStmt;
@@ -48,31 +48,31 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	 */
 	public DBBenutzerDAO() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(dbUrl, user, pwd);
 			
 			saveUserStmt = con
-					.prepareStatement("INSERT INTO user(usrID,uName,firstname,surname,email,pwd,street,city,country,zip,number) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO ISE_USR(UNAME,FIRSTNAME,SURNAME,EMAIL,PWD,STREET,CITY,COUNTRY,ZIP,NUMBR) VALUES(?,?,?,?,?,?,?,?,?,?)");
 			saveKundeStmt = con
-					.prepareStatement("INSERT INTO customer(usrID,birthday,sex) VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO ISE_CUSTOMER(USRID,BIRTHDAY,SEX) VALUES (?, ?, ?)");
 			saveMitarStmt = con
-					.prepareStatement("INSERT INTO employee(usrID,staffNo,sallary) VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO ISE_EMPLOYEE(usrID,STAFF_NO,SALARY) VALUES (?, ?, ?)");
 			
-			loadUserStmtID = con.prepareStatement("SELECT * FROM user WHERE usrID=?");
-			loadUserStmt = con.prepareStatement("SELECT * FROM user WHERE uName=?");
-			loadKundeStmt = con.prepareStatement("SELECT * FROM customer WHERE usrID=?");
-			loadMitarStmt = con.prepareStatement("SELECT * FROM employee WHERE usrID=?");
+			loadUserStmtID = con.prepareStatement("SELECT * FROM ISE_USR WHERE USRID=?");
+			loadUserStmt = con.prepareStatement("SELECT * FROM ISE_USR WHERE UNAME=?");
+			loadKundeStmt = con.prepareStatement("SELECT * FROM ISE_CUSTOMER WHERE USRID=?");
+			loadMitarStmt = con.prepareStatement("SELECT * FROM ISE_EMPLOYEE WHERE USRID=?");
 			
-			loadAllUserStmt = con.prepareStatement("SELECT * FROM user");
-			loadAllKundeStmt = con.prepareStatement("SELECT * FROM customer");
+			loadAllUserStmt = con.prepareStatement("SELECT * FROM ISE_USR");
+			loadAllKundeStmt = con.prepareStatement("SELECT * FROM ISE_CUSTOMER");
 			
-			deleteUserStmt = con.prepareStatement("DELETE FROM user WHERE usrID=?");
-			deleteKundeStmt = con.prepareStatement("DELETE FROM customer WHERE usrID=?");
-			deleteMitarStmt = con.prepareStatement("DELETE FROM employee WHERE usrID=?");
+			deleteUserStmt = con.prepareStatement("DELETE FROM ISE_USR WHERE USRID=?");
+			deleteKundeStmt = con.prepareStatement("DELETE FROM ISE_CUSTOMER WHERE USRID=?");
+			deleteMitarStmt = con.prepareStatement("DELETE FROM ISE_EMPLOYEE WHERE USRID=?");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Verbindungsaufbau zur DB nicht möglich!!");
+			System.out.println("Verbindungsaufbau zur DB nicht möglich!! ("+e.getMessage()+")");
 		}
 
 	}
@@ -83,26 +83,25 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	 */
 	private boolean speichereBenutzer(Benutzer b) {
 		try {
-			System.out.println("DBBenutzerDB:speichereBenutzer: " + b.getUsrID().toString()
-					+ ", " + b.getuName() + ", " + b.getNachname());
+			System.out.println("DBBenutzerDB:speichereBenutzer: " + b.getuName() + ", " + b.getNachname());
 
-			saveUserStmt.setString(1, b.getUsrID().toString());
-			saveUserStmt.setString(2, b.getuName());
-			saveUserStmt.setString(3, b.getVorname());
-			saveUserStmt.setString(4, b.getNachname());
-			saveUserStmt.setString(5, b.getEmail());
-			saveUserStmt.setString(6, b.getPassword());
-			saveUserStmt.setString(7, b.getStrasse());
-			saveUserStmt.setString(8, b.getOrt());
-			saveUserStmt.setString(9, b.getLand());
-			saveUserStmt.setInt(10, b.getPlz());
-			saveUserStmt.setInt(11, b.getHausNr());
+			//saveUserStmt.setInt(1, b.getUsrID());
+			saveUserStmt.setString(1, b.getuName());
+			saveUserStmt.setString(2, b.getVorname());
+			saveUserStmt.setString(3, b.getNachname());
+			saveUserStmt.setString(4, b.getEmail());
+			saveUserStmt.setString(5, b.getPassword());
+			saveUserStmt.setString(6, b.getStrasse());
+			saveUserStmt.setString(7, b.getOrt());
+			saveUserStmt.setString(8, b.getLand());
+			saveUserStmt.setInt(9, b.getPlz());
+			saveUserStmt.setInt(10, b.getHausNr());
 			
 			
 			saveUserStmt.executeUpdate();
 			return true;
 		}catch(NullPointerException e){
-			System.out.println("DBBenutzerDB:speichereBenutzer: Übergebener Benutzer(Parameter) ist null!!!");
+			System.out.println("DBBenutzerDB:speichereBenutzer: Übergebener Benutzer(Parameter) ist null!!! ("+e.getMessage()+")");
 			return false;
 		}catch (Exception e) {
 			System.out.println("DBBenutzerDB:speichereBenutzer: Fehler beim einfuegen des Benutzers zBSchon vorhanden,...("+e.getMessage()+")!!!");
@@ -116,10 +115,21 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			return false;
 		
 		try {
-			System.out.println("DBBenutzerDB:speichereKunden: " + k.getUsrID().toString()
-					+ ", " + k.getuName() + ", " + k.getNachname());
+			//Automatisch generierte UID von DB holen
+			loadUserStmt.setString(1,k.getuName());
+			ResultSet rs = loadUserStmt.executeQuery();
+			if (!rs.next()){
+				System.out.println("DBBenutzerDAO: getBenutzerByUName: Kein Benutzer gefunden!");
+				return false;
+			}
+			int usrID = rs.getInt("USRID");
+		
+	
+			
+			System.out.println("DBBenutzerDB:speichereKunden: ID:" + usrID
+					+ ", " + rs.getString("UNAME") + ", " + k.getNachname()+", Number: "+rs.getString("USRID"));
 
-			saveKundeStmt.setString(1, k.getUsrID().toString());
+			saveKundeStmt.setInt(1, usrID);
 			saveKundeStmt.setString(2, k.getBirthday());
 			saveKundeStmt.setString(3, k.getSex());
 			
@@ -142,10 +152,19 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			return false;
 		
 		try {
-			System.out.println("DBBenutzerDB:speichereMitarbeiter: " + m.getUsrID().toString()
+			//Automatisch generierte UID von DB holen
+			loadUserStmt.setString(1,m.getuName());
+			ResultSet rs = loadUserStmt.executeQuery();
+			if (!rs.next()){
+				System.out.println("DBBenutzerDAO: getBenutzerByUName: Kein Benutzer gefunden!");
+				return false;
+			}
+			int usrID = rs.getInt("USRID");
+		
+			System.out.println("DBBenutzerDB: speichereMitarbeiter: " + usrID
 					+ ", " + m.getuName() + ", " + m.getNachname());
 
-			saveMitarStmt.setString(1, m.getUsrID().toString());
+			saveMitarStmt.setInt(1, usrID);
 			saveMitarStmt.setString(2, String.valueOf(m.getStaffNo()) );
 			saveMitarStmt.setString(3, String.valueOf(m.getSallary()) );
 			
@@ -174,27 +193,29 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			int anzBenutzer = 0;
 			
 			while(result.next()){
-				String uName = result.getString("uName");
-				UUID uID = UUID.fromString(result.getString("usrID"));
-				String firstname = result.getString("firstname");
-				String surname = result.getString("surname");
-				String email = result.getString("email");
-				String pwd = result.getString("pwd");
-				String country = result.getString("country");
-				String street = result.getString("street");
-				String city = result.getString("city");
+				String uName = result.getString("UNAME");
+				String firstname = result.getString("FIRSTNAME");
+				String surname = result.getString("SURNAME");
+				String email = result.getString("EMAIL");
+				String pwd = result.getString("PWD");
+				String country = result.getString("COUNTRY");
+				String street = result.getString("STREET");
+				String city = result.getString("CITY");
 				try {
-					int zip = Integer.parseInt(result.getString("zip"));
-					int num = Integer.parseInt(result.getString("number"));
+					int uID = Integer.parseInt(result.getString("USRID"));
+					int zip = Integer.parseInt(result.getString("ZIP"));
+					int num = Integer.parseInt(result.getString("NUMBR"));
 					
 					liste.add(new Benutzer(uName, uID, pwd, firstname, surname, email,
 							country, zip, city, street, num));
 					anzBenutzer++;
 				} catch (NumberFormatException e) {
-					liste.add(new Benutzer(uName, uID, pwd, firstname, surname, email,
-							country, 0, city, street, 0));
-					anzBenutzer++;
-				}
+					System.out.println("DBBenutzerDao: getBenutzerList: Error beim Parsen des Strings in der DB in int wert");
+					return null;
+				}catch(Exception e){
+					System.out.println("DBBenutzerDao: getBenutzerList: Error beim Parsen: "+e.getMessage());
+					return null;
+				}	
 			}
 			
 			System.out.println("DBBenutzerDao: getBenutzerList: Anzahl Benutzer: " + anzBenutzer);
@@ -206,8 +227,14 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			return null;
 		}
 	}
+
 	
 	
+	
+	
+	
+	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -216,18 +243,15 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	@Override
 	public List<Benutzer> getKundenList() {
 		List<String> alleUsrIDKunden = new ArrayList<String>();
-		List<Benutzer> benutzerListe = new ArrayList<Benutzer>();
 		List<Benutzer> benutzerAlsKundeListe = new ArrayList<Benutzer>();
-		List<Kunde> kundenListe = new ArrayList<Kunde>();
+		
 		try {
 			ResultSet result = loadAllKundeStmt.executeQuery();
-			int anzKunden = 0;
 			
 			while(result.next()){
-				String usrID = result.getString("usrID");
+				String usrID = result.getString("USRID");
 				
 				alleUsrIDKunden.add(usrID);
-				anzKunden++;
 			}
 			
 			
@@ -260,23 +284,23 @@ public class DBBenutzerDAO implements BenutzerDAO {
 				return null;
 			}
 			
-			UUID uID = UUID.fromString(result.getString("usrID"));
-			String firstname = result.getString("firstname");
-			String surname = result.getString("surname");
-			String email = result.getString("email");
-			String pwd = result.getString("pwd");
-			String country = result.getString("country");
-			String street = result.getString("street");
-			String city = result.getString("city");
+			int usrID = result.getInt("USRID");
+			String firstname = result.getString("FIRSTNAME");
+			String surname = result.getString("SURNAME");
+			String email = result.getString("EMAIL");
+			String pwd = result.getString("PWD");
+			String country = result.getString("COUNTRY");
+			String street = result.getString("STREET");
+			String city = result.getString("CITY");
 			try {
-				int zip = Integer.parseInt(result.getString("zip"));
-				int num = Integer.parseInt(result.getString("number"));
+				int zip = Integer.parseInt(result.getString("ZIP"));
+				int num = Integer.parseInt(result.getString("NUMBR"));
 
-				return new Benutzer(uName, uID, pwd, firstname, surname, email,
+				return new Benutzer(uName, usrID, pwd, firstname, surname, email,
 						country, zip, city, street, num);
 			} catch (NumberFormatException e) {
 				System.out.println("DBBenutzerDAO: getBenutzerByUName: achtung, zip oder number sind in db keine Integer!!");
-				return new Benutzer(uName, uID, pwd, firstname, surname, email,
+				return new Benutzer(uName, usrID, pwd, firstname, surname, email,
 						country, 0, city, street, 0);
 			}
 		} catch (Exception e) {
@@ -295,18 +319,18 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			}
 			
 			
-			UUID uID = UUID.fromString(result.getString("usrID"));
-			String uName = result.getString("uName");
-			String firstname = result.getString("firstname");
-			String surname = result.getString("surname");
-			String email = result.getString("email");
-			String pwd = result.getString("pwd");
-			String country = result.getString("country");
-			String street = result.getString("street");
-			String city = result.getString("city");
+			int uID = result.getInt("USRID");
+			String uName = result.getString("UNAME");
+			String firstname = result.getString("FIRSTNAME");
+			String surname = result.getString("SURNAME");
+			String email = result.getString("EMAIL");
+			String pwd = result.getString("PWD");
+			String country = result.getString("COUNTRY");
+			String street = result.getString("STREET");
+			String city = result.getString("CITY");
 			try {
-				int zip = Integer.parseInt(result.getString("zip"));
-				int num = Integer.parseInt(result.getString("number"));
+				int zip = Integer.parseInt(result.getString("ZIP"));
+				int num = Integer.parseInt(result.getString("NUMBR"));
 
 				return new Benutzer(uName, uID, pwd, firstname, surname, email,
 						country, zip, city, street, num);
@@ -336,7 +360,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 		
 		try{
-			loadKundeStmt.setString(1, b.getUsrID().toString());
+			loadKundeStmt.setString(1, String.valueOf(b.getUsrID()));
 			ResultSet result = loadKundeStmt.executeQuery();
 			
 			if (!result.next()){
@@ -369,7 +393,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 		
 		try{
-			loadMitarStmt.setString(1, b.getUsrID().toString());
+			loadMitarStmt.setString( 1, String.valueOf(b.getUsrID()) );
 			ResultSet result = loadMitarStmt.executeQuery();
 			
 			if (!result.next()){
@@ -381,8 +405,8 @@ public class DBBenutzerDAO implements BenutzerDAO {
 			int staffNo=0;
 			
 			try{
-				staffNo = Integer.parseInt(result.getString("staffNo"));
-				sallary = Integer.parseInt(result.getString("sallary"));
+				staffNo = Integer.parseInt(result.getString("STAFF_NO"));
+				sallary = Integer.parseInt(result.getString("SALARY"));
 			}catch(NumberFormatException e){
 				System.out.println("DBBenutzerDAO: getBenutzerByUName: achtung, zip oder number sind in db keine Integer!!");
 			}
@@ -461,12 +485,11 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		String usrID="";
 		
 		try{
-			usrID = b.getUsrID().toString();
+			usrID =String.valueOf(b.getUsrID());
 		}catch(NullPointerException e){
 			return "";
 		}
 		
 		return usrID;
 	}
-
 }

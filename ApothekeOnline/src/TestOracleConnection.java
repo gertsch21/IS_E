@@ -11,7 +11,7 @@ public class TestOracleConnection {
 		//Daten von Peter, um auf seine Oracle DB zuzugreifen
 		String database = "jdbc:oracle:thin:@oracle-lab.cs.univie.ac.at:1521:lab";
 		String user = "a1363772";
-		String pwd = "Welcome1";
+		String pwd = "PRise16";
 		
 		try{
 			//Treiber einbinden
@@ -19,16 +19,24 @@ public class TestOracleConnection {
 			//Verbindung aufbauen
 			Connection con = DriverManager.getConnection(database, user, pwd);
 			//statement vorbereiten
-			PreparedStatement loadUserStmt = con.prepareStatement("SELECT * FROM usr");
+			PreparedStatement loadUserStmt = con.prepareStatement("SELECT * FROM ISE_USR");
 			ResultSet result = loadUserStmt.executeQuery();
 			
 			//Solange Datensätze vorhanden
 			while(result.next()){
-				System.out.println("Name: "+result.getString("name")+", Email: "+result.getString("email"));
+				System.out.println("Name: "+result.getString("uname")+", id: "+result.getString("usrid"));
 			}
+			
+			
+			
+			
 		}catch(Exception e){
 			System.out.println("Verbindung konnte nicht aufgebaut werden!");
 		}
+		
+		
+		
+
 
 	}
 

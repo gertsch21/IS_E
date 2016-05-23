@@ -4,7 +4,7 @@
 package management;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 import model.Benutzer;
 import model.Kunde;
@@ -48,13 +48,15 @@ public class Benutzerverwaltung {
 */
 	
 	public boolean kundeAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password, String birthday, String sex){//Verbesserungswürdig!!!
-		UUID id = UUID.randomUUID();
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(Integer.MAX_VALUE);//nur positive, aber bis maximum
 		System.out.println("Benutzerverwaltung:kundeAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+",  "+birthday+", "+sex+", anlegen!");
 		return dao.speichereKunde(new Kunde(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr,birthday,sex));
 	}
 	
 	public boolean mitarbeiterAnlegen(String vorname, String nachname, String email, String land, int plz, String wohnort, String strasse, int hausNr, String username, String password, int staffNo, int salary){//Verbesserungswürdig!!!
-		UUID id = UUID.randomUUID();
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(Integer.MAX_VALUE);
 		System.out.println("Benutzerverwaltung:mitarbeiterAnlegen: "+id+", "+vorname+" "+nachname+", "+email+", "+land+" "+plz+" "+" "+wohnort+" "+strasse+", "+username+" "+password+",  "+staffNo+", "+salary+", anlegen!");
 		return dao.speichereMitarbeiter(new Mitarbeiter(username,id,password,vorname,nachname,email,land,plz,wohnort,strasse,hausNr,staffNo,salary));
 	}

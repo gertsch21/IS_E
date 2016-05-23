@@ -1,6 +1,5 @@
 package model;
 
-import java.util.UUID;
 
 /**
  * @author Gerhard
@@ -8,7 +7,7 @@ import java.util.UUID;
  */
 public class Benutzer {
 	private String uName;
-	private UUID usrID;
+	private int usrID;
 	private String password;
 	private String vorname;
 	private String nachname;
@@ -33,7 +32,7 @@ public class Benutzer {
 	 * @param ort
 	 * @param hausNr
 	 */
-	public Benutzer(String uName, UUID usrID, String password, String vorname,
+	public Benutzer(String uName, int usrID, String password, String vorname,
 			String nachname, String email, String land, int plz, String ort, String strasse,
 			int hausNr) {
 		super();
@@ -66,7 +65,7 @@ public class Benutzer {
 	/**
 	 * @return the usrID
 	 */
-	public UUID getUsrID() {
+	public int getUsrID() {
 		return usrID;
 	}
 	/**
@@ -144,7 +143,7 @@ public class Benutzer {
 	/**
 	 * @param usrID the usrID to set
 	 */
-	public void setUsrID(UUID usrID) {
+	public void setUsrID(int usrID) {
 		this.usrID = usrID;
 	}
 	/**

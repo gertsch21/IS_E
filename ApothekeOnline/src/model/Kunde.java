@@ -3,7 +3,6 @@
  */
 package model;
 
-import java.util.UUID;
 
 /**
  * @author Gerhard
@@ -26,7 +25,7 @@ public class Kunde extends Benutzer {
 	 * @param ort
 	 * @param hausNr
 	 */
-	public Kunde(String uName, UUID usrID, String password, String vorname,
+	public Kunde(String uName, int usrID, String password, String vorname,
 			String nachname, String email, String land, int plz, String ort, String strasse,
 			int hausNr, String birthday, String sex) {
 		super(uName, usrID, password, vorname, nachname, email, land, plz, ort,
