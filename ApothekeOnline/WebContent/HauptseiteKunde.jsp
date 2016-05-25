@@ -24,7 +24,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet"/>
-
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet" media="screen">
 <!-- Bootstrap theme -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
@@ -32,12 +32,15 @@
 
 </head>
 <body>
-	<div class="container theme-showcase" role="main">
 
-		<!-- Main jumbotron for a primary marketing message or call to action -->
-		<div class="jumbotron">
+<!-------- HEADER -------->
+	<div class="container wrap sidebar-right">
+		<div class="row"> 
+			<div class="col-md-12"> 
+				<div class="jumbotron">
 
-			<h1>Willkommen <%=session.getAttribute("username")%></h1> <!-- wenn null, dann darf man sowieso nicht auf die Hauptseite zugreifen -->
+					<h1>Apotheke Online</h1>
+					<h3>Herzlich Willkommen <%=session.getAttribute("username")%>!</h3> <!-- wenn null, dann darf man sowieso nicht auf die Hauptseite zugreifen -->
 
 <%
 	if(session.getAttribute("message")!=null){ %>
@@ -49,33 +52,68 @@
 <% 		request.getSession().setAttribute("fehler", null);
 	} 
 %>
-
-			<div>
-				<form class="navbar-form navbar-left"
-					action="SucheProduktController" method="post">
-					<div class="form-group">
-						<b>Produkt:</b> <input class="form-control" name="suchwert"
-							type="text" size="80" />
+					<!-- Suchfeld -->
+					<div class="col-md-10">
+						<form class="navbar-form navbar-left"
+							action="SucheProduktController" method="post">
+								<input class="form-control" name="suchwert" type="text" size="80" />
+								<input class="btnGreen" type="submit" value="Produkt suchen" />
+						</form>
 					</div>
-					<input class="btn btn-primary" type="submit" value="suchen" />
-				</form>
-
+					
+					<!-- Logout-Button -->
+					<div class="col-md-2">
+						<form action="Logincontroller" method="GET">
+							<input class="btnGreen" name="logout" type="submit"
+								value="Logout" />
+						</form>
+					</div>
+				</div> <!-- End jumbotron -->
+			</div> 
+		</div><!-- End HEADER -->
+		
+<!-- Container für Hauptbereich: große Spalte für Produkte + kleine für Warenkorb -->		
+		<div class="container"> 
+			<div class="row">
+				 <div class="col-md-8"> <!-- Hauptspalte -->
+				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
+				 	<br><br><br><br><br><br><br><br><br><br>
+				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
+				 	<br><br><br><br><br><br><br><br><br><br>
+				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
+				 	<br><br><br><br><br><br><br><br><br><br>
+				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
+				 </div> <!-- Ende Hauptspalte -->
+				 
+				 <!-------- Sidebar für Warenkorb -------->				 
+				 <div class="col-md-4"> 
+				 	<div class="sidebar-nav-fixed affix">
+							 
+		                   <div class="panel panel-cart">
+						      <div class="panel-heading">Warenkorb</div>
+						      <div class="panel-body">
+						      	Hexamed x 1
+						      	<br><br>
+							      <form action="#" method="GET">
+										<input class="btnGreen" name="checkout" type="submit"
+											value="zur Kasse" />
+								  </form>
+						      </div>
+						    </div>
+	  
+           			</div>
+				 </div> <!-- Ende Sidebar für Warenkorb -->
 			</div>
-
-
-			<br />
-			<br />
-
-
-			<div>
-				<form action="Logincontroller" method="GET">
-					<input class="btn btn-primary" name="logout" type="submit"
-						value="Logout" />
-				</form>
-
+		</div> <!-- Ende Container Hauptbereich -->
+		
+<!-------- Footer -------->		
+		<div class="row"> 
+			<div class="col-md-12">
+				(c) Apotheke Online
 			</div>
-
-		</div>
+		</div> <!-- Ende Footer -->
 	</div>
+		
+        
 </body>
 </html>
