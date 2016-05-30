@@ -76,13 +76,8 @@
 		<div class="container"> 
 			<div class="row">
 				 <div class="col-md-8"> <!-- Hauptspalte -->
-				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
-				 	<br><br><br><br><br><br><br><br><br><br>
-				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
-				 	<br><br><br><br><br><br><br><br><br><br>
-				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
-				 	<br><br><br><br><br><br><br><br><br><br>
-				 	<h1> Hier bitte die Produktübersicht einbauen! </h1>
+				 	<jsp:include page="Produktuebersicht.jsp" />
+				 	
 				 </div> <!-- Ende Hauptspalte -->
 				 
 				 <!-------- Sidebar für Warenkorb -------->				 
