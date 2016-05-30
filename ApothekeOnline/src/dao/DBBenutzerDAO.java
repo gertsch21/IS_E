@@ -77,7 +77,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 
 	}
 
-	/*
+	/**
 	 * 
 	 * zum speichern in der Tabelle Benutzer, benötigt, um Kunden und Mitarbeiter zu speichern
 	 */
@@ -180,11 +180,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see dao.BenutzerDAO#getBenutzerList()
-	 */
+
 	@Override
 	public List<Benutzer> getBenutzerList() {
 		List<Benutzer> liste = new ArrayList<Benutzer>();
@@ -231,15 +227,6 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	
 	
 	
-	
-	
-	
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see dao.BenutzerDAO#getBenutzerList()
-	 */
 	@Override
 	public List<Benutzer> getKundenList() {
 		List<String> alleUsrIDKunden = new ArrayList<String>();
@@ -268,12 +255,6 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	}
 	
 	
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see dao.BenutzerDAO#getBenutzerByUName(java.lang.String)
-	 */
 	@Override
 	public Benutzer getBenutzerByUName(String uName) {
 		try {
@@ -309,6 +290,11 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 	}
 
+	/**
+	 * Mit dieser Methode kann man auch einen Benutzer anhand seiner eindeutigen UserID bekommen
+	 * @param usrID die Userid des zu suchenden Users 
+	 * @return null, falls kein Benutzer gefunden wurde, ansonsten das Benutzerobjekt
+	 */
 	private Benutzer getBenutzerByUsrID(String usrID) {
 		try {
 			loadUserStmtID.setString(1, usrID);
@@ -346,12 +332,8 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	}
 	
 	
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see dao.BenutzerDAO#getKundeByUsername(java.lang.String)
-	 */
+
+	@Override
 	public Kunde getKundeByUsername(String uName){
 		Benutzer b = this.getBenutzerByUName(uName);//Kunde als Benutzer(in DB gespeichert)
 		if(b == null){
@@ -380,11 +362,8 @@ public class DBBenutzerDAO implements BenutzerDAO {
 	}
 
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see dao.BenutzerDAO#getMitarbeiterByUsername(java.lang.String)
-	 */
+
+	@Override
 	public Mitarbeiter getMitarbeiterByUsername(String uName){
 		Benutzer b = this.getBenutzerByUName(uName);//Kunde als Benutzer(in DB gespeichert)
 		if(b == null){
@@ -419,7 +398,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		}
 	}
 	
-	/*
+	/**
 	 * Ist benötigt, um Einträge aus der Tabelle Benutzer zu löschen
 	 * Wird benötigt um Kunden und Mitarbeiter zu löschen
 	 * 
@@ -478,6 +457,11 @@ public class DBBenutzerDAO implements BenutzerDAO {
 		return true;
 	}
 
+	/**
+	 * Mit dieser Methode kann man anhand vom Usernamen eines Benutzers die ID bekommen.
+	 * @param uName Der Username des zu suchenden Benutzers
+	 * @return Die UserID
+	 */
 	private String getUsrIDFromUName(String uName){
 		
 		Benutzer b = getBenutzerByUName(uName);

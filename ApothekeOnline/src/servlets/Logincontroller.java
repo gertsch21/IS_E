@@ -27,6 +27,7 @@ public class Logincontroller extends HttpServlet {
     }
 
 	/**
+	 * Falls ein Get request kommt, soll auf die Loginseite verwiesen werden.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +38,8 @@ public class Logincontroller extends HttpServlet {
 	}
 
 	/**
+	 * Hier wird geprüft ob die eingegebenen Daten korrekt sind, falls ja, war der Login erfolgreich und es wird zur Hauptseite verwiesen,
+	 * falls nein, dann wird die jeweilige Fehlermeldung ausgegeben.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
