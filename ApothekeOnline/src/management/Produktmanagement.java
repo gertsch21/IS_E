@@ -46,6 +46,8 @@ public class Produktmanagement {
     
     
     public Produkt getProduktByProduktID(int prodID){
+    	
+    	
 		return dao.getProduktByProduktID(prodID);
 	}
 	public Category getCategorybyCategoryID(int categoryID){
