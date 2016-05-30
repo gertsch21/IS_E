@@ -8,37 +8,63 @@ package model;
  * Deckt Positionen einer Bestellung ab. Produkt mit Menge und Gesamtpreis vereint.
  *
  */
-public class Position extends Produkt{
+public class Position{
+	private int warenkorbID;
 	private int positionsNr;
 	private int menge;
 	private double gesamtpreis;
+	private int produktID;
 	
-	public Position (int prodID, String prodName, double price, String prodDescription, int categoryID, int positionNr, int menge, double gesamtpreis) {
-		super(prodID, prodName, price, prodDescription, categoryID);
-		this.positionsNr = positionNr;
+	public Position(int wID, int positionsNr, int menge, double gesamtpreis, int produktID) {
+		this.warenkorbID = wID;
+		this.positionsNr = positionsNr;
 		this.menge = menge;
 		this.gesamtpreis = gesamtpreis;
+		this.produktID = produktID;
 	}
+
+	
 	
 	/**
-	 * @return positionsNr
+	 * @return the warenkorbID
+	 */
+	public int getWarenkorbID() {
+		return warenkorbID;
+	}
+
+	/**
+	 * @return the positionsNr
 	 */
 	public int getPositionsNr() {
 		return positionsNr;
 	}
 
 	/**
-	 * @return menge
+	 * @return the menge
 	 */
 	public int getMenge() {
 		return menge;
 	}
 
 	/**
-	 * @return gesamtpreis
+	 * @return the gesamtpreis
 	 */
 	public double getGesamtpreis() {
 		return gesamtpreis;
+	}
+
+	/**
+	 * @return the produktID
+	 */
+	public int getProduktID() {
+		return produktID;
+	}
+	
+	/**
+	 * @param warenkorbID the warenkorbID to set
+	 */
+	public void setWarenkorbID(int warenkorbID) {
+		this.warenkorbID = warenkorbID;
 	}
 
 	/**
@@ -61,7 +87,13 @@ public class Position extends Produkt{
 	public void setGesamtpreis(double gesamtpreis) {
 		this.gesamtpreis = gesamtpreis;
 	}
-}
 
+	/**
+	 * @param produktID the produktID to set
+	 */
+	public void setProduktID(int produktID) {
+		this.produktID = produktID;
+	}
+}
 
 
