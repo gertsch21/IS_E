@@ -132,6 +132,23 @@ input.btnGreen {
 	  min-width: 200px;
 }
 
+input.btnAdd2Cart {
+	background-color: #FFFFFF;
+	color: #22B573;
+	display: inline-block;
+	  padding: 4px 8px;
+	  margin-bottom: 1px;
+	  font-size: 12px;
+	  font-weight: normal;
+	  line-height: 1.42857143;
+	  text-align: center;
+	  white-space: nowrap;
+	  vertical-align: middle;
+	  border: 1px solid transparent;
+	  border-radius: 4px;
+	  min-width: 150px;
+}
+
 button.btnMember {
 	border-color: #22B573;
 	border-width: 3px;
@@ -207,3 +224,13 @@ a.btn {
 }
 .panel-cart > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #d6e9c6;
+}
+div.product {
+  background-color: #eeeeee;
+  border-radius: 4px;
+  width: 300 px;
+  height: 500 px;
+  align: center;
+  padding: 10px;
+   
+}  
