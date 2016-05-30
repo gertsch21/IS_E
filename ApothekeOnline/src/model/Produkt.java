@@ -16,6 +16,9 @@ public class Produkt {
         this.categoryID = categoryID;
     }
     
+    public Produkt() {
+    	
+    }
 //getters
 
     public int getprodID() {
@@ -36,19 +39,19 @@ public class Produkt {
     
 //setters    
     
-    public void setprodID() {
+    public void setprodID(int prodID) {
         this.prodID = prodID;
     }
-    public void setprodName(){
+    public void setprodName(String prodName){
         this.prodName = prodName;
     }
-    public void setprice(){
+    public void setprice(double price){
         this.price = price;
     }
-    public void setprodDescription(){
+    public void setprodDescription(String prodDescription){
         this.prodDescription = prodDescription;
     }
-    public void setcategoryID(){
+    public void setcategoryID(int categoryID){
         this.categoryID = categoryID;
     }
 }
