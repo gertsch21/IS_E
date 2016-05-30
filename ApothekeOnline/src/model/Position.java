@@ -9,27 +9,31 @@ package model;
  *
  */
 public class Position{
-	private int warenkorbID;
+	private String orderID;
 	private int positionsNr;
 	private int menge;
 	private double gesamtpreis;
 	private int produktID;
 	
-	public Position(int wID, int positionsNr, int menge, double gesamtpreis, int produktID) {
-		this.warenkorbID = wID;
-		this.positionsNr = positionsNr;
+	/**
+	 * @param oID
+	 * @param positionsNr
+	 * @param menge
+	 * @param gesamtpreis
+	 * @param produktID
+	 */
+	public Position(String oID, int positionsNr, int menge, double gesamtpreis, int produktID) { this.orderID = oID; this.positionsNr = positionsNr;
 		this.menge = menge;
 		this.gesamtpreis = gesamtpreis;
 		this.produktID = produktID;
 	}
 
 	
-	
 	/**
-	 * @return the warenkorbID
+	 * @return the orderID
 	 */
-	public int getWarenkorbID() {
-		return warenkorbID;
+	public String getorderID() {
+		return orderID;
 	}
 
 	/**
@@ -63,8 +67,8 @@ public class Position{
 	/**
 	 * @param warenkorbID the warenkorbID to set
 	 */
-	public void setWarenkorbID(int warenkorbID) {
-		this.warenkorbID = warenkorbID;
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
 	}
 
 	/**
