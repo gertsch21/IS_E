@@ -87,8 +87,9 @@
 		                   <div class="panel panel-cart">
 						      <div class="panel-heading">Warenkorb</div>
 						      <div class="panel-body">
-						      	Hexamed x 1
-						      	<br><br>
+						      	
+						      	<jsp:include page="Warenkorb.jsp" />
+						      	
 							      <form action="#" method="GET">
 										<input class="btnGreen" name="checkout" type="submit"
 											value="zur Kasse" />
