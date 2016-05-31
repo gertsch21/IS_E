@@ -46,28 +46,33 @@ public class Logincontroller extends HttpServlet {
 		Benutzerverwaltung benver = Benutzerverwaltung.getInstance();
 		String username = request.getParameter("username"); 
 		String password = request.getParameter("password");
-		String alsWas = request.getParameter("alsWas");
-		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+"', als "+alsWas+".");
+		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+".");
 		
 		if(benver.getCustomerByUname(username) !=null){
-			request.getSession().invalidate();
-			System.out.println("LoginController: Erfolgreiche Pruefung(istKunde): Weiterleiten zur Hauptseite des Kunden!");
-			HttpSession session = request.getSession(true);
-			session.setAttribute("username", username);
-			session.setAttribute("fehler", null);
-			request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
-			response.setContentType("text/html");
-			return;
+			if(benver.getCustomerByUname(username).getPassword().equals(password)){
+				request.getSession().invalidate();
+				System.out.println("LoginController: Erfolgreiche Pruefung(istKunde): Weiterleiten zur Hauptseite des Kunden!");
+				HttpSession session = request.getSession(true);
+				session.setAttribute("username", username);
+				session.setAttribute("fehler", null);
+				request.getRequestDispatcher("HauptseiteKunde.jsp").include(request, response);
+				response.setContentType("text/html");
+				return;
+			}
+			System.out.println("Logincontroller: Falsches Passwort eingegeben von '"+username+"'");
 		}
 		if(benver.getEmployeeByUname(username) != null){
-			request.getSession().invalidate();
-			System.out.println("LoginController: Erfolgreiche Pruefung(istMitarbeiter): Weiterleiten zur Hauptseite des Mitarbeiters!");
-			HttpSession session = request.getSession(true);
-			session.setAttribute("username", username);
-			session.setAttribute("fehler", null);
-			request.getRequestDispatcher("HauptseiteMitarbeiter.jsp").include(request, response);
-			response.setContentType("text/html");
-			return;
+			if(benver.getEmployeeByUname(username).equals(password)){
+				request.getSession().invalidate();
+				System.out.println("LoginController: Erfolgreiche Pruefung(istMitarbeiter): Weiterleiten zur Hauptseite des Mitarbeiters!");
+				HttpSession session = request.getSession(true);
+				session.setAttribute("username", username);
+				session.setAttribute("fehler", null);
+				request.getRequestDispatcher("HauptseiteMitarbeiter.jsp").include(request, response);
+				response.setContentType("text/html");
+				return;
+			}
+			System.out.println("Logincontroller: Falsches Passwort eingegeben von '"+username+"'");
 		}
 
 //Falls nichts von beiden
