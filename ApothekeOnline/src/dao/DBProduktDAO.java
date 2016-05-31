@@ -56,7 +56,8 @@ public class DBProduktDAO implements ProduktDAO {
 		}
 
 	}
-
+	
+	@Override
 	public boolean speichereProdukt(Produkt p) {
         try {
 			System.out.println("DBProduktDB:speichereProdukt: " + p.getprodName());
@@ -81,8 +82,9 @@ public class DBProduktDAO implements ProduktDAO {
 		return false;
 	}
 
+	@Override
 	public boolean speichereCategory(Category c) {
-        try {
+        	try {
 			System.out.println("DBProduktDB:speichereCategory: " + p.getcategoryName());
 
 			saveCategoryStmt.setInt(1, c.getcategoryID());
