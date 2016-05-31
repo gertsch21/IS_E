@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.util.GregorianCalendar;
+
 
 /**
  * @author Gerhard
@@ -10,6 +12,7 @@ package model;
  */
 public class Kunde extends Benutzer {
 
+	private GregorianCalendar calendar;
 	private String birthday;
 	private char sex;
 	
@@ -35,7 +38,6 @@ public class Kunde extends Benutzer {
 				strasse,hausNr);
 		this.birthday = birthday;
 		this.sex = sex.charAt(0);
-		
 		
 	}
 
