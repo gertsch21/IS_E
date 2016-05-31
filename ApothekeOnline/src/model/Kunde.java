@@ -11,10 +11,9 @@ package model;
 public class Kunde extends Benutzer {
 
 	private String birthday;
-	private String sex;
+	private char sex;
 	
 	/**
-	 * 
 	 * @param uName Der eindeutige Username des jeweiligen Kunden.
 	 * @param usrID Die eindeutige Userid des jeweiligen Kunden.
 	 * @param password Das Passwort des jeweiligen Kunden.
@@ -35,7 +34,8 @@ public class Kunde extends Benutzer {
 		super(uName, usrID, password, vorname, nachname, email, land, plz, ort,
 				strasse,hausNr);
 		this.birthday = birthday;
-		this.sex = sex;
+		this.sex = sex.charAt(0);
+		
 		
 	}
 
@@ -51,7 +51,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @return Das Geschlecht des Kunden
 	 */
-	public String getSex() {
+	public char getSex() {
 		return sex;
 	}
 
@@ -67,7 +67,7 @@ public class Kunde extends Benutzer {
 	/**
 	 * @param sex Das zu speichernde Geschlecht
 	 */
-	public void setSex(String sex) {
+	public void setSex(char sex) {
 		this.sex = sex;
 	}
 	

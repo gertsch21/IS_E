@@ -131,7 +131,7 @@ public class DBBenutzerDAO implements BenutzerDAO {
 
 			saveKundeStmt.setInt(1, usrID);
 			saveKundeStmt.setString(2, k.getBirthday());
-			saveKundeStmt.setString(3, k.getSex());
+			saveKundeStmt.setString(3, String.valueOf(k.getSex()));
 			
 			
 			saveKundeStmt.executeUpdate();
