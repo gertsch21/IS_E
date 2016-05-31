@@ -11,10 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Benutzer;
 import model.Bestellung;
 import model.Position;
-import model.Warenkorb;
 
 /**
  * @author Katrin
@@ -26,7 +24,7 @@ public class DBBestellungDAO implements BestellungDAO {
 	private final String user = "a1363772";
 	private final String pwd = "PRise16";
 	
-	//Statements um Daten aus db zu holen(über SQL)
+	//Statements um Daten aus DB zu holen
 	private PreparedStatement savePositionStmt;
 	private PreparedStatement saveBestellungStmt;
 	
@@ -42,7 +40,7 @@ public class DBBestellungDAO implements BestellungDAO {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(dbUrl, user, pwd);
-			
+			//Setzen der Statement mit gewünschten SQL
 			savePositionStmt = con
 					.prepareStatement("INSERT INTO ISE_ITEM(orderID,itemID,quantity,totalPrice,productID) VALUES(?,?,?,?,?)");
 			saveBestellungStmt = con
@@ -211,8 +209,8 @@ public class DBBestellungDAO implements BestellungDAO {
 	@Override
 	public Bestellung getBestellungByID(String oID) {
 		try {
-			loadPositionStmt.setString(1, oID);
-			ResultSet result = loadPositionStmt.executeQuery();
+			loadBestellungStmt.setString(1, oID);
+			ResultSet result = loadBestellungStmt.executeQuery();
 			
 			if (!result.next()){
 				System.out.println("DBBestellungDAO: getBestellungByID: Keine Bestellung gefunden!");
