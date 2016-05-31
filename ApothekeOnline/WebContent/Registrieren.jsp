@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<td>GebDatum:</td>
-						<td><input type="date" name="bday" /></td>
+						<td><input type="date" name="bday" />(Tag-Monat-Jahr)</td>
 					</tr>
 					<tr>
 						<td>Email:</td>

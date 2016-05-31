@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -73,6 +74,55 @@ public class Registriercontroller extends HttpServlet {
 			String passwordW=request.getParameter("passwordW");
 			
 			
+			//Splitte nach bindestrichen
+			String[] geb = birthday.split("-");
+			
+			//Falls nicht mit Bindestrichen getrennt eingegeben wurde -> splitte nach punkten
+			if(geb.length<3) geb=birthday.split("\\.");
+		
+			//reine Kontrollausgabe
+			for(String i: geb)
+				System.out.println("Geb: "+i);
+			try{
+				int jahr = Integer.parseInt(geb[0]);
+				int monat = Integer.parseInt(geb[1]);
+				int tag = Integer.parseInt(geb[2]);
+				
+				//Falls in falscher Reihenfolge eingegeben
+				if(jahr<1900){//Falls Tag-Monat-Jahr Reihenfolge eingegeben wurde
+					int zwischen =jahr;
+					jahr=tag;
+					tag=jahr;
+				}
+				
+				//falls jemand vor 1900 geboren wurde, wird er nicht hier gespeichert
+				if(jahr <1900) throw new Exception("Jahr vor 1900");
+					
+				//wenn 18 jahre, dann müsste er min in diesem jahr geboren worden sein
+				int minAchtzehn = new GregorianCalendar().get(GregorianCalendar.YEAR)-18;
+				GregorianCalendar calendar = new GregorianCalendar(jahr, monat,tag);
+				if(!(jahr<(minAchtzehn))){
+					request.getSession(true).setAttribute("fehler", "Sie muessen 18 sein!");
+					throw new Exception("Da ist jemand noch nicht 18");
+				}
+				
+				//in der notation tag.monat.jahr in DB speichern
+				birthday = tag+"."+monat+"."+jahr;
+				
+			}catch(NullPointerException e){
+				request.getSession(true).setAttribute("fehler", "Pruefen sie nochmal ihr Geburtsdatum!");
+				System.out.println("RegistrierungsController: Geburtsdatum inkorrekt! "+e.getMessage());
+				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
+				response.setContentType("text/html");
+				return;
+			}catch(Exception e){
+				if(request.getSession(true).getAttribute("fehler")==null)
+					request.getSession(true).setAttribute("fehler", "Pruefen sie nochmal ihr Geburtsdatum!");
+				System.out.println("RegistrierungsController: Geburtsdatum inkorrekt! "+e.getMessage());
+				request.getRequestDispatcher("Registrieren.jsp").include(request, response);
+				response.setContentType("text/html");
+				return;
+			}
 			
 			System.out.println("RegistrierController: Post: geschlecht: "+geschlecht+", Geb: "+birthday);
 			
