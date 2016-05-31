@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import management.Benutzerverwaltung;
+import model.Kunde;
+import model.Mitarbeiter;
 
 /**
  * Servlet implementation class Logincontroller
@@ -48,8 +50,13 @@ public class Logincontroller extends HttpServlet {
 		String password = request.getParameter("password");
 		System.out.println("LoginController: Pruefe Login: '"+username+"' mit PWD:'"+password+".");
 		
-		if(benver.getCustomerByUname(username) !=null){
-			if(benver.getCustomerByUname(username).getPassword().equals(password)){
+		request.getSession(true).setAttribute("fehler", "Kein Benutzer mit solch einem Usernamen registriert!");
+
+		
+		Kunde k = benver.getCustomerByUname(username);
+		Mitarbeiter m = benver.getEmployeeByUname(username);
+		if( k!=null){
+			if(k.getPassword().equals(password)){
 				request.getSession().invalidate();
 				System.out.println("LoginController: Erfolgreiche Pruefung(istKunde): Weiterleiten zur Hauptseite des Kunden!");
 				HttpSession session = request.getSession(true);
@@ -59,10 +66,11 @@ public class Logincontroller extends HttpServlet {
 				response.setContentType("text/html");
 				return;
 			}
+			request.getSession(true).setAttribute("fehler", "Ihr Passwort ist nicht korrekt!");
 			System.out.println("Logincontroller: Falsches Passwort eingegeben von '"+username+"'");
 		}
-		if(benver.getEmployeeByUname(username) != null){
-			if(benver.getEmployeeByUname(username).equals(password)){
+		if(m != null){
+			if(m.getPassword().equals(password)){
 				request.getSession().invalidate();
 				System.out.println("LoginController: Erfolgreiche Pruefung(istMitarbeiter): Weiterleiten zur Hauptseite des Mitarbeiters!");
 				HttpSession session = request.getSession(true);
@@ -73,12 +81,11 @@ public class Logincontroller extends HttpServlet {
 				return;
 			}
 			System.out.println("Logincontroller: Falsches Passwort eingegeben von '"+username+"'");
+			request.getSession(true).setAttribute("fehler", "Ihr Passwort ist nicht korrekt!");
 		}
 
 //Falls nichts von beiden
-		request.getSession().invalidate();
 		System.out.println("LoginController: Weiterleiten zum Login!");
-		request.getSession(true).setAttribute("fehler", "Falsche Username/PWD Kombi!");
 		request.getRequestDispatcher("Login.jsp").include(request, response);
 		response.setContentType("text/html");
 	}
