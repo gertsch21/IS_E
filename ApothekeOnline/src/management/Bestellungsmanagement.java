@@ -32,4 +32,5 @@ public class Bestellungsmanagement {
 	}
 	
 	//Hier sollte noch die Bestellungslogik eingefügt werden
+	
 }
