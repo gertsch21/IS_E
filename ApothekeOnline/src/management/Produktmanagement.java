@@ -13,7 +13,7 @@ public class Produktmanagement {
 	private ProduktDAO dao;
 	
 	private Produktmanagement() {
-		dao = new DBProduktmanagementDAO();
+		dao = new DBProduktDAO();
 	}
     
     public static Produktmanagement getInstance(){
@@ -46,14 +46,16 @@ public class Produktmanagement {
     
     
     public Produkt getProduktByProduktID(int prodID){
-    	
-    	
 		return dao.getProduktByProduktID(prodID);
 	}
 	public Category getCategorybyCategoryID(int categoryID){
 		return dao.getCategoryByCategoryID(categoryID);
 	}
-    
+	
+	
+	public Produkt getProduktByProduktName(int prodName){
+		return dao.getProduktByProduktID(prodName);
+	}
     
     public boolean loescheProdukt(int prodID){
 		return dao.loescheProduktByProdID(prodID);

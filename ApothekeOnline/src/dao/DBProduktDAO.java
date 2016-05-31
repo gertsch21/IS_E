@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Locale.Category;
 
 import model.Produkt;
 
@@ -37,13 +38,13 @@ public class DBProduktDAO implements ProduktDAO {
 	}
 
 	@Override
-	public Produkt getProduktByProduktID(int prodID) {
+	public Produkt getProduktByProduktName(String prodName) {
 		
-		String  sql = "SELECT * FROM ISE_Product WHERE productID = ?";
+		String  sql = "SELECT * FROM ISE_Product WHERE productName = ?";
 		Connection con = DriverManager.getConnection(database, user, pwd);
 		PreparedStatement pstm = con.prepareStatement(sql);
 		
-		pstm.setInt(1,prodID);
+		pstm.setString(2,prodName);
 		ResultSet result = pstm.executeQuery();
 		
 		Produkt p = new Produkt();

@@ -18,4 +18,5 @@ public interface ProduktDAO {
 	public boolean loescheProduktByProdID(prodID);
 	public boolean loescheCategoryByCategoryID(categoryID);
 	
+	Produkt getProduktByProduktName(String prodName);
 }
