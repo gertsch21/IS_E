@@ -27,6 +27,7 @@ public class Registriercontroller extends HttpServlet {
     }
 
 	/**
+	 * Falls ein Get request kommt, soll auf die Registrierseite verwiesen werden.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +39,8 @@ public class Registriercontroller extends HttpServlet {
 	}
 
 	/**
+	 * Hier wird geprüft ob die eingegebenen Daten korrekt sind, falls ja, war die Registrieren erfolgreich und es wird zur Hauptseite verwiesen,
+	 * falls nein, dann wird die jeweilige Fehlermeldung ausgegeben.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

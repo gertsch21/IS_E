@@ -21,16 +21,17 @@ public class Benutzer {
 	
 	
 	/**
-	 * @param uName
-	 * @param usrID
-	 * @param password
-	 * @param vorname
-	 * @param nachname
-	 * @param email
-	 * @param land
-	 * @param plz
-	 * @param ort
-	 * @param hausNr
+	 * @param uName Der eindeutige Username des jeweiligen Benutzers.
+	 * @param usrID Die eindeutige Userid des jeweiligen Benutzers.
+	 * @param password Das Passwort des jeweiligen Benutzers.
+	 * @param vorname Der Vorname des jeweiligen Benutzers.
+	 * @param nachname Der Nachname des jeweiligen Benutzers.
+	 * @param email Die Email des jeweiligen Benutzers.
+	 * @param land Das Land in dem der Benutzer gemeldet ist.
+	 * @param plz Die Postleitzahl in der der Benutzer gemeldet ist.
+	 * @param ort Der Ort/Stadt in der der Benutzer gemeldet ist.
+	 * @param strasse Die Strass des Benutzers.
+	 * @param hausNr Die Hausnummer des Kunden.
 	 */
 	public Benutzer(String uName, int usrID, String password, String vorname,
 			String nachname, String email, String land, int plz, String ort, String strasse,
@@ -49,152 +50,155 @@ public class Benutzer {
 		this.hausNr = hausNr;
 	}
 	
-	
+	/**
+	 * Diese Methode überschreibt die Methode der Klasse Object und soll die wichtigsten Daten eines Benutzers zurückgeben
+	 * @return Der String, welcher die wichtigsten Daten des Benutzers enthält.
+	 */
 	public String toString(){
 		String s = "Uname: "+uName+", Name: "+vorname+" "+nachname+", email: "+email;
 		return s;
 	}
-//getters	
 	
+	
+	
+//getters	
 	/**
-	 * @return the uName
+	 * @return der Username
 	 */
 	public String getuName() {
 		return uName;
 	}
 	/**
-	 * @return the usrID
+	 * @return die Userid
 	 */
 	public int getUsrID() {
 		return usrID;
 	}
 	/**
-	 * @return the password
+	 * @return Das Passwort
 	 */
 	public String getPassword() {
 		return password;
 	}
 	/**
-	 * @return the vorname
+	 * @return der Vorname
 	 */
 	public String getVorname() {
 		return vorname;
 	}
 	/**
-	 * @return the nachname
+	 * @return Der Nachname
 	 */
 	public String getNachname() {
 		return nachname;
 	}
 	/**
-	 * @return the email
+	 * @return Die Email
 	 */
 	public String getEmail() {
 		return email;
 	}
 	/**
-	 * @return the land
+	 * @return Das Land
 	 */
 	public String getLand() {
 		return land;
 	}
 	/**
-	 * @return the plz
+	 * @return Die plz
 	 */
 	public int getPlz() {
 		return plz;
 	}
 	/**
-	 * @return the ort
+	 * @return Der Ort
 	 */
 	public String getOrt() {
 		return ort;
 	}
 	/**
-	 * @return the hausNr
+	 * @return Die HausNr
 	 */
 	public int getHausNr() {
 		return hausNr;
 	}
-
-	
-	
-/**
-	 * @return the strasse
+	/**
+	 * @return Die Strasse
 	 */
 	public String getStrasse() {
 		return strasse;
 	}
 
-	/**
-	 * @param strasse the strasse to set
-	 */
-	public void setStrasse(String strasse) {
-		this.strasse = strasse;
-	}
+	
 
-	//setters
+//setters
+
 	/**
-	 * @param uName the uName to set
+	 * @param uName Der zu speichernde uName
 	 */
 	public void setuName(String uName) {
 		this.uName = uName;
 	}
 	/**
-	 * @param usrID the usrID to set
+	 * @param Die zu speichernde ID
 	 */
 	public void setUsrID(int usrID) {
 		this.usrID = usrID;
 	}
 	/**
-	 * @param password the password to set
+	 * @param password Das zu speichernde Passwort
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	/**
-	 * @param vorname the vorname to set
+	 * @param vorname Der zu speichernde Vorname
 	 */
 	public void setVorname(String vorname) {
 		this.vorname = vorname;
 	}
 	/**
-	 * @param nachname the nachname to set
+	 * @param nachname Der zu speichernde Nachname
 	 */
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
 	/**
-	 * @param email the email to set
+	 * @param email Die zu speichernde Email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	/**
-	 * @param land the land to set
+	 * @param land Das zu speichernde Land
 	 */
 	public void setLand(String land) {
 		this.land = land;
 	}
 	/**
-	 * @param plz the plz to set
+	 * @param plz Die zu speichernde PLZ
 	 */
 	public void setPlz(int plz) {
 		this.plz = plz;
 	}
 	/**
-	 * @param ort the ort to set
+	 * @param ort Der zu speichernde Ort
 	 */
 	public void setOrt(String ort) {
 		this.ort = ort;
 	}
 	/**
-	 * @param hausNr the hausNr to set
+	 * @param hausNr Die zu speichernde Hausnummer
 	 */
 	public void setHausNr(int hausNr) {
 		this.hausNr = hausNr;
 	}
-	
-	
+	/**
+	 * @param strasse Die zu speichernde Strasse
+	 */
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
 	
 }

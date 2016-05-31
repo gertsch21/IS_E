@@ -28,6 +28,7 @@ public class Benutzerverwaltungscontroller extends HttpServlet {
     }
 
 	/**
+	 * Falls ein Get request kommt, soll auf die Loginseite verwiesen werden.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +38,7 @@ public class Benutzerverwaltungscontroller extends HttpServlet {
 	}
 
 	/**
+	 * Bei einem Postrequest werden alle Kunden des Systems aufgelistet, falls der Button zuLoeschen gedrückt wurde, wird zuerst der entsprechende Kunde gelöscht.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

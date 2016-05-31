@@ -16,16 +16,20 @@ public class Mitarbeiter extends Benutzer {
 	
 	
 	/**
-	 * @param uName
-	 * @param usrID
-	 * @param password
-	 * @param vorname
-	 * @param nachname
-	 * @param email
-	 * @param land
-	 * @param plz
-	 * @param ort
-	 * @param hausNr
+	 * 
+	 * @param uName Der eindeutige Username des jeweiligen Mitarbeiters.
+	 * @param usrID Die eindeutige Userid des jeweiligen Mitarbeiters.
+	 * @param password Das Passwort des jeweiligen Mitarbeiters.
+	 * @param vorname Der Vorname des jeweiligen Mitarbeiters.
+	 * @param nachname Der Nachname des jeweiligen Mitarbeiters.
+	 * @param email Die Email des jeweiligen Mitarbeiters.
+	 * @param land Das Land in dem der Mitarbeiter gemeldet ist.
+	 * @param plz Die Postleitzahl in der der Mitarbeiter gemeldet ist.
+	 * @param ort Der Ort/Stadt in der der Mitarbeiter gemeldet ist.
+	 * @param strasse Die Strass des Mitarbeiters.
+	 * @param hausNr Die Hausnummer des Mitarbeiters.
+	 * @param staffNo Die Mitarbeiternummer des Mitarbeiters.
+	 * @param sallary Das Gehalt, welches der Kunde bekommt.(in Cent gespeichert)
 	 */
 	public Mitarbeiter(String uName, int usrID, String password,
 			String vorname, String nachname, String email, String land,
@@ -41,14 +45,14 @@ public class Mitarbeiter extends Benutzer {
 	
 //getters
 	/**
-	 * @return the staffNo
+	 * @return Die Kundennummer
 	 */
 	public int getStaffNo() {
 		return staffNo;
 	}
 
 	/**
-	 * @return the sallary
+	 * @return Das Gehalt
 	 */
 	public int getSallary() {
 		return sallary;
@@ -57,19 +61,23 @@ public class Mitarbeiter extends Benutzer {
 	
 //setters
 	/**
-	 * @param staffNo the staffNo to set
+	 * @param staffNo Die zu speichernde Kundennummer
 	 */
 	public void setStaffNo(int staffNo) {
 		this.staffNo = staffNo;
 	}
 
 	/**
-	 * @param sallary the sallary to set
+	 * @param sallary Das zu speichernde Gehalt
 	 */
 	public void setSallary(int sallary) {
 		this.sallary = sallary;
 	}
 
+	/**
+	 * Diese Methode überschreibt die Methode der Klasse Object und soll die wichtigsten Daten eines Mitarbeiters zurückgeben
+	 * @return Der String, welcher die wichtigsten Daten des Mitarbeiters enthält.
+	 */
 	public String toString(){
 		String s = super.toString();
 		return s+", sallary: "+sallary+", StaffNo: "+staffNo;
