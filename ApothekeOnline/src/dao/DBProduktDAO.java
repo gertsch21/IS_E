@@ -108,13 +108,71 @@ public class DBProduktDAO implements ProduktDAO {
 
 	@Override
 	public List<Produkt> getProduktList() {
-		// TODO Auto-generated method stub
+		List<Produkt> liste = new ArrayList<Produkt>();
+		try {
+			ResultSet result = loadAllProduktStmt.executeQuery();
+			int anzProdukt = 0;
+			
+			while(result.next()){
+				String prodName = result.getString("NAME");
+				
+				try {
+					int prodID = Integer.parseInt(result.getString("PRODUCTID"));
+					
+					liste.add(new Product(prodName, prodID, price, prodDescription, categoryID));
+					anzProduct++;
+				} catch (NumberFormatException e) {
+					System.out.println("DBProductDao: getProductList: Error beim Parsen des Strings in der DB in int wert");
+					return null;
+				}catch(Exception e){
+					System.out.println("DBProductDao: getProductList: Error beim Parsen: "+e.getMessage());
+					return null;
+				}	
+			}
+			
+			System.out.println("DBProductDao: getProductList: Anzahl Produkte: " + anzProdukt);
+
+			return liste;
+			
+		} catch (Exception e) {
+			System.out.println("DBProduktDAO: getProduktListe: Error");
+			return null;
+		}
 		return null;
 	}
 
 	@Override
 	public List<Category> getCategoryList() {
-		// TODO Auto-generated method stub
+		List<Category> liste = new ArrayList<Category>();
+		try {
+			ResultSet result = loadAllCategoryStmt.executeQuery();
+			int anzCategory = 0;
+			
+			while(result.next()){
+				String categoryName = result.getString("NAME");
+				
+				try {
+                        int categoryID = Integer.parseInt(result.getString("CATEGORYID"));
+					
+					liste.add(new Category(categoryName, categoryID, categoryDescription));
+					anzCategory++;
+				} catch (NumberFormatException e) {
+					System.out.println("DBProductDao: getCategoryList: Error beim Parsen des Strings in der DB in int wert");
+					return null;
+				}catch(Exception e){
+					System.out.println("DBProductDao: getCategoryList: Error beim Parsen: "+e.getMessage());
+					return null;
+				}	
+			}
+			
+			System.out.println("DBProductDao: getCategoryList: Anzahl Kategorien: " + anzCategory);
+
+			return liste;
+			
+		} catch (Exception e) {
+			System.out.println("DBProduktDAO: getCategoryListe: Error");
+			return null;
+		}
 		return null;
 	}
 
