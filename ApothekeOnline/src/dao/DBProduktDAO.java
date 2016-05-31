@@ -135,24 +135,65 @@ public class DBProduktDAO implements ProduktDAO {
 		}
 		return p;
 	}
-		// TODO Auto-generated method stub0	}
+
+	@Override
+	public Product getProductByProductID(int prodID) {
+        Product p = this.getProductByProductID(int prodID);
+		if(b == null){
+			System.out.println("DBBProduktDAO: getProductByProductID: nicht im System");
+			return null;
+		}
+		} catch (Exception e) {
+			System.out.println("DBProduktDAO: getProductByProductID: Error");
+			return null;
+		}
+    }
 
 	@Override
 	public Category getCategoryByCategoryID(int categoryID) {
-		// TODO Auto-generated method stub
+		try {
+			loadCategoryStmtID.setString(1, cetagoryID);
+			ResultSet result = loadCategoryStmtID.executeQuery();
+			if (!result.next()){
+				System.out.println("DBProduktDAO: getProductByProductID: Keine Category gefunden!");
+				return null;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("DBProduktDAO: getCategoryByCategoryID: Error");
+			return null;
+		}
 		return null;
 	}
 
 	@Override
 	public boolean loescheProduktByProdID() {
-		// TODO Auto-generated method stub
-		return false;
+		if(produktID.equals("") || getProduktByproduktID(prodID) == null)
+			return false;
+		try{
+			deleteProduktStmt.setInt(1, prodID);
+			deleteProduktStmt.setString(2, prodName);
+			deleteProduktStmt.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("DBProduktDAO: LoescheProdukt: "+e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean loescheCategoryByCategoryID() {
-		// TODO Auto-generated method stub
-		return false;
+		if(categoryID.equals("") || getCategoryByCategoryID(categoryID) == null)
+			return false;
+		try{
+			deleteCategoryStmt.setInt(1, categoryID);
+			deleteCategoryStmt.setString(2, categoryName);
+			deleteCategoryStmt.executeUpdate();
+		}catch(SQLException e){
+			System.out.println("DBProduktDAO: LoescheCategory: "+e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }
