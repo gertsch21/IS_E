@@ -37,11 +37,12 @@
 				Kunde: (user:nessi | passwort:hallo)<br /> Mitarbeiter:
 				(user:gertsch21 | passwort:hallo)
 			</p>
-			<%
+<%
 				if (request.getSession().getAttribute("fehler") != null) {
 			%>
-			<h2><%=request.getSession().getAttribute("fehler")%></h2>
+					<h2><%=request.getSession().getAttribute("fehler")%></h2>
 			<%
+					request.getSession().setAttribute("fehler", null); //nach ausgabe auf null setzen
 				}
 			%>
 			<br />

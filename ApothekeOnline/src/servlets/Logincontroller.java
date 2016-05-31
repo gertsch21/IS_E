@@ -73,6 +73,7 @@ public class Logincontroller extends HttpServlet {
 //Falls nichts von beiden
 		request.getSession().invalidate();
 		System.out.println("LoginController: Weiterleiten zum Login!");
+		request.getSession(true).setAttribute("fehler", "Falsche Username/PWD Kombi!");
 		request.getRequestDispatcher("Login.jsp").include(request, response);
 		response.setContentType("text/html");
 	}
