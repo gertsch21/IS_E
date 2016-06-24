@@ -19,7 +19,7 @@ public class Produkt {
     public Produkt() {
     	
     }
-//getters
+//gevf,kvftters
 
     public int getprodID() {
         return prodID;
