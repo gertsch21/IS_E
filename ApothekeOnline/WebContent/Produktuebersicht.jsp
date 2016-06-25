@@ -52,6 +52,7 @@ try {
             e.printStackTrace();
         }
     }
+	//out.println(session.getAttribute("prodOut"));
 %>
   		
 </body>

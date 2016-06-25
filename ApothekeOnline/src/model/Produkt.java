@@ -27,13 +27,13 @@ public class Produkt {
     public String getprodName(){
         return prodName;
     }
-    public String getprice(){
+    public double getprice(){
         return price;
     }
     public String getprodDescription(){
         return prodDescription;
     }
-    public String getcategoryID(){
+    public int getcategoryID(){
         return categoryID;
     }
     

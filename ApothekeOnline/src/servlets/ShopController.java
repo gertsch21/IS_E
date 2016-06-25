@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import management.Benutzerverwaltung;
 import management.Produktmanagement;
+import model.Produkt;
 
 /**
  * Servlet implementation class ShopController
@@ -44,8 +47,35 @@ public class ShopController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String productID = request.getParameter("product_id"); 
 		HttpSession session = request.getSession();
+		
+		/*StringBuffer prodOut = new StringBuffer();
+		
+		Produktmanagement prodman = Produktmanagement.getInstance();
+		List<Produkt> allProducts = prodman.getAlleProdukt();
+		
+		for(Produkt product : allProducts) {
+			prodOut.append("<div class=\"product\">"
+								+ "<h2>" + product.getprodName() + "</h2>" 
+								+ "<p class=\"description\">" + product.getprodDescription() + "</p>"
+								+ "<p class=\"price\">" + product.getprice() + " € </p>"
+						+ "</div>"
+			);
+			
+			prodOut.append("<form action=\"ShopController\" method=\"POST\">"
+							+ "<input class=\"btnAdd2Cart\" name=\"zumWarenkorb\" type=\"submit\" value=\"zum Warenkorb\"/>"
+							+ "<input type=\"hidden\" name=\"product_id\" value=" + product.getprodID() + ">"
+							+ "</form>"
+			);
+		}
+		
+		session.setAttribute("prodOut", prodOut);
+		*/
+		
+		
+		// ---------------- Warenkorb ------------------
+		String productID = request.getParameter("product_id"); 
+		
 		Map<String, Integer> cart = new HashMap();
 
 

@@ -6,14 +6,14 @@ import java.util.Random;
 import model.Produkt;
 import model.Category;
 import dao.ProduktDAO;
-import dao.DBProduktDAO;
+import dao.DBProduktDAO1;
 
 public class Produktmanagement {
 	private static Produktmanagement produktmanagementInstance=null;
 	private ProduktDAO dao;
 	
 	private Produktmanagement() {
-		dao = new DBProduktDAO();
+		dao = new DBProduktDAO1();
 	}
     
     public static Produktmanagement getInstance(){
@@ -45,23 +45,22 @@ public class Produktmanagement {
 	}
     
     
-    public Produkt getProduktByProduktID(int prodID){
+    public Produkt getProduktByProduktID(String prodID){
 		return dao.getProduktByProduktID(prodID);
 	}
-	public Category getCategorybyCategoryID(int categoryID){
+	public Category getCategorybyCategoryID(String categoryID){
 		return dao.getCategoryByCategoryID(categoryID);
 	}
 	
 	
-	public Produkt getProduktByProduktName(int prodName){
+	public Produkt getProduktByProduktName(String prodName){
 		return dao.getProduktByProduktID(prodName);
 	}
     
-    public boolean loescheProdukt(int prodID){
+    public boolean loescheProdukt(String prodID){
 		return dao.loescheProduktByProdID(prodID);
 	}
-	public boolean loescheCategory(int categoryID){
+	public boolean loescheCategory(String categoryID){
 		return dao.loescheCategoryByCategoryID(categoryID);
 	}
-    
 }

@@ -11,11 +11,11 @@ public interface ProduktDAO {
 	
 	public List<Produkt> getProduktList();
 	public List<Category> getCategoryList();
-	public Produkt getProduktByProduktID(int prodID);
-	public Category getCategoryByCategoryID(int categoryID);
+	public Produkt getProduktByProduktID(String prodID);
+	public Category getCategoryByCategoryID(String categoryID);
 	
     
-	public boolean loescheProduktByProdID(prodID);
-	public boolean loescheCategoryByCategoryID(categoryID);
+	public boolean loescheProduktByProdID(String prodID);
+	public boolean loescheCategoryByCategoryID(String categoryID);
 	
 }
