@@ -49,7 +49,7 @@ public class ShopController extends HttpServlet {
 	
 		HttpSession session = request.getSession();
 		
-		/*StringBuffer prodOut = new StringBuffer();
+		StringBuffer prodOut = new StringBuffer();
 		
 		Produktmanagement prodman = Produktmanagement.getInstance();
 		List<Produkt> allProducts = prodman.getAlleProdukt();
@@ -59,18 +59,18 @@ public class ShopController extends HttpServlet {
 								+ "<h2>" + product.getprodName() + "</h2>" 
 								+ "<p class=\"description\">" + product.getprodDescription() + "</p>"
 								+ "<p class=\"price\">" + product.getprice() + " € </p>"
-						+ "</div>"
 			);
 			
 			prodOut.append("<form action=\"ShopController\" method=\"POST\">"
 							+ "<input class=\"btnAdd2Cart\" name=\"zumWarenkorb\" type=\"submit\" value=\"zum Warenkorb\"/>"
 							+ "<input type=\"hidden\" name=\"product_id\" value=" + product.getprodID() + ">"
 							+ "</form>"
+							+ "</div>"
 			);
 		}
 		
 		session.setAttribute("prodOut", prodOut);
-		*/
+		
 		
 		
 		// ---------------- Warenkorb ------------------
@@ -85,8 +85,8 @@ public class ShopController extends HttpServlet {
 		} 
 
 		if ( cart.containsKey(productID) ) {
-			int quantity = (Integer) cart.get(productID);
-			cart.put(productID, quantity + 1);
+			int quantity = (Integer) cart.get(productID) + 1;
+			cart.put(productID, quantity);
 		
 		} else {
 			cart.put(productID, 1);
@@ -109,11 +109,11 @@ public class ShopController extends HttpServlet {
 	        	 
 	        	 while (it.hasNext()) {
 	        	    	Map.Entry pair = (Map.Entry)it.next();
-	        	    	
+	        	    	String keyValue = (String) pair.getKey();
 	        	        cartOut.append(""
-	        	        		+ "<td>" + pair.getKey() + "</td>"
+	        	        		+ "<td>" + prodman.getProduktByProduktID(keyValue).getprodName() + "</td>"
 	        	        		+ "<td>&nbsp; x &nbsp;</td>"
-	        	        		+ "<td>" + pair.getValue() + "</td>");
+	        	        		+ "<td>" + pair.getValue().toString() + "</td>");
 	        	    
 	        	        it.remove(); // avoids a ConcurrentModificationException
 	        	 }
